@@ -18,4 +18,15 @@ export default defineConfig([
       parserOptions: { ecmaFeatures: { jsx: true } },
     },
   },
+  {
+    // These modules deliberately export shared helpers and constants next to
+    // their components (the design-system primitives, the auth hook, the
+    // role → home-route map). Fast refresh still works for the app itself.
+    files: [
+      'src/components/ui.jsx',
+      'src/components/ProtectedRoute.jsx',
+      'src/context/AuthContext.jsx',
+    ],
+    rules: { 'react-refresh/only-export-components': 'off' },
+  },
 ])
