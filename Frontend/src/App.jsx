@@ -1,122 +1,100 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { Toaster } from 'react-hot-toast'
+import { AuthProvider } from './context/AuthContext'
+import Layout from './components/Layout'
+import ProtectedRoute from './components/ProtectedRoute'
 
-function App() {
-  const [count, setCount] = useState(0)
+import Landing from './pages/Landing'
+import Login from './pages/Login'
+import Register from './pages/Register'
+import Profile from './pages/Profile'
+import Notifications from './pages/Notifications'
+import NotFound from './pages/NotFound'
 
-  return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+import StudentDashboard from './pages/student/Dashboard'
+import JobDetail from './pages/student/JobDetail'
+import MyApplications from './pages/student/MyApplications'
 
-      <div className="ticks"></div>
+import RecruiterDashboard from './pages/recruiter/Dashboard'
+import JobForm from './pages/recruiter/JobForm'
+import Applicants from './pages/recruiter/Applicants'
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+import AdminDashboard from './pages/admin/Dashboard'
+import AdminUsers from './pages/admin/Users'
+import AdminRecruiters from './pages/admin/Recruiters'
+import AdminJobs from './pages/admin/Jobs'
+import AdminApplications from './pages/admin/Applications'
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+const toastOptions = {
+    duration: 3800,
+    style: {
+        background: 'rgba(15, 21, 42, 0.92)',
+        color: '#e2e8f0',
+        border: '1px solid rgba(255,255,255,0.09)',
+        borderRadius: '12px',
+        fontSize: '13.5px',
+        padding: '11px 15px',
+        backdropFilter: 'blur(14px)',
+        boxShadow: '0 20px 45px -22px rgba(2,6,23,1)',
+        maxWidth: '26rem',
+    },
+    success: { iconTheme: { primary: '#34d399', secondary: '#04060f' } },
+    error: { iconTheme: { primary: '#fb7185', secondary: '#04060f' }, duration: 5000 },
 }
 
-export default App
+export default function App() {
+    return (
+        <BrowserRouter>
+            <AuthProvider>
+                <Toaster position="top-right" toastOptions={toastOptions} gutter={10} />
+
+                <Routes>
+                    {/* public */}
+                    <Route path="/" element={<Landing />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+
+                    {/* everything below shares the navbar + footer chrome */}
+                    <Route element={<Layout />}>
+                        {/* any signed-in role */}
+                        <Route element={<ProtectedRoute />}>
+                            <Route path="/profile" element={<Profile />} />
+                            <Route path="/notifications" element={<Notifications />} />
+                        </Route>
+
+                        {/* students */}
+                        <Route element={<ProtectedRoute roles={['student']} />}>
+                            <Route path="/dashboard" element={<StudentDashboard />} />
+                            <Route path="/my-applications" element={<MyApplications />} />
+                        </Route>
+
+                        {/* job detail is readable by students, recruiters and admins */}
+                        <Route element={<ProtectedRoute />}>
+                            <Route path="/jobs/:id" element={<JobDetail />} />
+                        </Route>
+
+                        {/* recruiters */}
+                        <Route element={<ProtectedRoute roles={['recruiter']} />}>
+                            <Route path="/recruiter/dashboard" element={<RecruiterDashboard />} />
+                            <Route path="/recruiter/jobs/new" element={<JobForm />} />
+                            <Route path="/recruiter/jobs/:id/edit" element={<JobForm />} />
+                            <Route path="/recruiter/jobs/:id/applicants" element={<Applicants />} />
+                        </Route>
+
+                        {/* placement cell */}
+                        <Route element={<ProtectedRoute roles={['admin']} />}>
+                            <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} />
+                            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+                            <Route path="/admin/users" element={<AdminUsers />} />
+                            <Route path="/admin/recruiters" element={<AdminRecruiters />} />
+                            <Route path="/admin/jobs" element={<AdminJobs />} />
+                            <Route path="/admin/applications" element={<AdminApplications />} />
+                        </Route>
+
+                        <Route path="*" element={<NotFound />} />
+                    </Route>
+                </Routes>
+            </AuthProvider>
+        </BrowserRouter>
+    )
+}
