@@ -1,0 +1,21 @@
+# Render blueprint for the CampusHire API.
+# Import this from the repo root with "New → Blueprint" on Render, or create a
+# Web Service by hand using the settings below.
+services:
+  - type: web
+    name: campushire-api
+    runtime: node
+    plan: free
+    rootDir: Backend
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: MONGO_URI
+        sync: false        # paste the Atlas connection string in the dashboard
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CLIENT_URL
+        sync: false        # your Vercel URL, e.g. https://campushire.vercel.app
+      - key: NODE_VERSION
+        value: "20"
