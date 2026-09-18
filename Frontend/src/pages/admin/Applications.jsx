@@ -81,16 +81,16 @@ export default function AdminApplications() {
                                 <div className="p-5">
                                     <div className="flex flex-wrap items-start justify-between gap-4">
                                         <div className="min-w-0">
-                                            <p className="text-[14.5px] font-medium text-white">
+                                            <p className="text-[14.5px] font-medium text-slate-900">
                                                 {app.student?.firstName} {app.student?.lastName}
                                                 <span className="text-slate-500"> → </span>
-                                                <span className="text-slate-200">{app.job?.title || 'Deleted role'}</span>
+                                                <span className="text-slate-700">{app.job?.title || 'Deleted role'}</span>
                                             </p>
                                             <p className="mt-1 text-[12.5px] text-slate-500">
                                                 {app.job?.postedBy?.companyName || '—'}
-                                                <span className="text-slate-600"> · {app.student?.email}</span>
+                                                <span className="text-slate-400"> · {app.student?.email}</span>
                                             </p>
-                                            <div className="mt-2.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11.5px] text-slate-600">
+                                            <div className="mt-2.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11.5px] text-slate-400">
                                                 <span className="tabular-nums">CGPA {snap.cgpa ?? '—'}</span>
                                                 <span>{snap.branch || '—'}</span>
                                                 <span className="tabular-nums">Batch {snap.graduationYear ?? '—'}</span>
@@ -120,11 +120,11 @@ export default function AdminApplications() {
                                                 <span className="absolute left-[3px] top-2 bottom-2 w-px bg-white/10" />
                                                 {app.history.map(log => (
                                                     <li key={log._id} className="relative">
-                                                        <span className="absolute -left-5 top-1.5 size-[7px] rounded-full bg-indigo-400 ring-4 ring-indigo-400/12" />
-                                                        <p className="text-[13px] text-slate-300">
+                                                        <span className="absolute -left-5 top-1.5 size-[7px] rounded-full bg-brand-500 ring-4 ring-indigo-400/12" />
+                                                        <p className="text-[13px] text-slate-400">
                                                             <span className="capitalize">{log.oldStatus}</span>
                                                             {' → '}
-                                                            <span className="font-medium capitalize text-white">{log.newStatus}</span>
+                                                            <span className="font-medium capitalize text-slate-900">{log.newStatus}</span>
                                                             {log.changedBy && (
                                                                 <span className="text-slate-500">
                                                                     {' by '}{log.changedBy.firstName} {log.changedBy.lastName}
@@ -133,9 +133,9 @@ export default function AdminApplications() {
                                                             )}
                                                         </p>
                                                         {log.reason && (
-                                                            <p className="mt-1 text-[12.5px] italic text-slate-400">“{log.reason}”</p>
+                                                            <p className="mt-1 text-[12.5px] italic text-slate-500">“{log.reason}”</p>
                                                         )}
-                                                        <p className="mt-0.5 font-mono text-[11px] text-slate-600">
+                                                        <p className="mt-0.5 font-mono text-[11px] text-slate-400">
                                                             {formatDateTime(log.createdAt)}
                                                         </p>
                                                     </li>

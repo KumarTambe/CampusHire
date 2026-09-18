@@ -81,19 +81,19 @@ export default function AdminJobs() {
                                         <div className="flex flex-wrap items-center gap-2.5">
                                             {job.status === 'published' ? (
                                                 <Link to={`/jobs/${job._id}`}
-                                                    className="text-[15px] font-semibold text-white transition-colors hover:text-indigo-200">
+                                                    className="text-[15px] font-semibold text-slate-900 transition-colors hover:text-indigo-700">
                                                     {job.title}
                                                 </Link>
                                             ) : (
-                                                <span className="text-[15px] font-semibold text-white">{job.title}</span>
+                                                <span className="text-[15px] font-semibold text-slate-900">{job.title}</span>
                                             )}
                                             <StatusBadge status={job.status} />
                                         </div>
                                         <p className="mt-1 text-[12.5px] text-slate-500">
                                             {companyOf(job)}
-                                            {job.postedBy?.email && <span className="text-slate-600"> · {job.postedBy.email}</span>}
+                                            {job.postedBy?.email && <span className="text-slate-400"> · {job.postedBy.email}</span>}
                                         </p>
-                                        <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[11.5px] text-slate-600">
+                                        <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[11.5px] text-slate-400">
                                             {job.location && (
                                                 <span className="inline-flex items-center gap-1.5">
                                                     <IconPin className="size-3.5" />{job.location}
@@ -112,9 +112,9 @@ export default function AdminJobs() {
                                         </div>
                                     </div>
 
-                                    <div className="flex shrink-0 items-center gap-2 rounded-xl bg-white/[0.04] px-3.5 py-2 ring-1 ring-inset ring-white/8">
-                                        <IconUsers className="size-4 text-indigo-300" />
-                                        <span className="text-[13px] font-semibold tabular-nums text-white">
+                                    <div className="flex shrink-0 items-center gap-2 rounded-xl bg-slate-50 px-3.5 py-2 ring-1 ring-inset ring-slate-200">
+                                        <IconUsers className="size-4 text-indigo-600" />
+                                        <span className="text-[13px] font-semibold tabular-nums text-slate-900">
                                             {job.applicantCount}
                                         </span>
                                         <span className="text-[12px] text-slate-500">

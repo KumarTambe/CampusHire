@@ -9,12 +9,6 @@ import { Button, Field, Input, Select, Textarea, PageLoader, cx } from '../compo
 import { IconArrowRight, IconGrad, IconBriefcase } from '../components/icons'
 import { BRANCHES, GRAD_YEARS } from '../lib/format'
 
-const HIGHLIGHTS = [
-    'Students: see only the roles you actually qualify for',
-    'Recruiters: post once, review applicants with frozen snapshots',
-    'Your profile drives every eligibility decision',
-]
-
 const ROLE_CARDS = [
     { value: 'student', label: 'Student', blurb: 'Find and apply to roles', icon: IconGrad },
     { value: 'recruiter', label: 'Recruiter', blurb: 'Hire from campus', icon: IconBriefcase },
@@ -81,8 +75,7 @@ export default function Register() {
         <AuthShell
             title="Create your account"
             subtitle="Tell us who you are — we will tailor the portal around it."
-            highlights={HIGHLIGHTS}
-            footer={<>Already registered? <Link to="/login" className="font-medium text-indigo-300 underline-offset-4 hover:underline">Sign in</Link></>}
+            footer={<>Already registered? <Link to="/login" className="font-semibold text-brand-600 underline-offset-4 hover:underline">Sign in</Link></>}
         >
             <form onSubmit={onSubmit} className="space-y-5">
                 {/* role picker */}
@@ -95,12 +88,12 @@ export default function Register() {
                             className={cx(
                                 'rounded-xl border p-3.5 text-left transition-all duration-200',
                                 role === value
-                                    ? 'border-indigo-400/50 bg-indigo-500/10 shadow-[0_0_0_3px_rgba(99,102,241,0.09)]'
-                                    : 'border-white/10 bg-white/[0.03] hover:border-white/20 hover:bg-white/[0.05]'
+                                    ? 'border-brand-400 bg-brand-50'
+                                    : 'border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50'
                             )}
                         >
-                            <Icon className={cx('size-5', role === value ? 'text-indigo-300' : 'text-slate-500')} />
-                            <p className="mt-2.5 text-[13.5px] font-medium text-white">{label}</p>
+                            <Icon className={cx('size-5', role === value ? 'text-brand-600' : 'text-slate-400')} />
+                            <p className="mt-2.5 text-[13.5px] font-semibold text-slate-900">{label}</p>
                             <p className="mt-0.5 text-[11.5px] text-slate-500">{blurb}</p>
                         </button>
                     ))}
@@ -130,7 +123,7 @@ export default function Register() {
 
                 {role === 'student' ? (
                     <div className="animate-fade space-y-4">
-                        <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">
+                        <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-slate-400">
                             Academic profile
                         </p>
                         <div className="grid grid-cols-2 gap-3">
@@ -162,7 +155,7 @@ export default function Register() {
                     </div>
                 ) : (
                     <div className="animate-fade space-y-4">
-                        <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">
+                        <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-slate-400">
                             Company details
                         </p>
                         <Field label="Company name">
@@ -176,7 +169,7 @@ export default function Register() {
                             <Textarea rows={3} placeholder="What your company does, in a sentence or two."
                                 value={form.companyDescription} onChange={set('companyDescription')} />
                         </Field>
-                        <p className="rounded-xl border border-amber-400/20 bg-amber-400/[0.06] px-3.5 py-3 text-[12.5px] leading-relaxed text-amber-200/90">
+                        <p className="rounded-xl border border-amber-200 bg-amber-50 px-3.5 py-3 text-[12.5px] leading-relaxed text-amber-800">
                             Recruiter accounts are reviewed by the placement cell before you can publish a job.
                         </p>
                     </div>

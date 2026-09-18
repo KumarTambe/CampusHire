@@ -82,10 +82,10 @@ function ProfileForm({ user }) {
                 {/* ------------------------------------------------- identity */}
                 <div className="space-y-5">
                     <Card className="animate-rise p-6 text-center">
-                        <span className="mx-auto grid size-16 place-items-center rounded-2xl bg-gradient-to-br from-indigo-500/25 to-violet-500/10 text-[19px] font-semibold text-indigo-200 ring-1 ring-inset ring-white/10">
+                        <span className="mx-auto grid size-16 place-items-center rounded-2xl bg-brand-50 text-[19px] font-bold text-brand-700 ring-1 ring-inset ring-brand-100">
                             {initials(user)}
                         </span>
-                        <h2 className="mt-4 text-[17px] font-semibold text-white">
+                        <h2 className="mt-4 text-[17px] font-semibold text-slate-900">
                             {user.firstName} {user.lastName}
                         </h2>
                         <p className="mt-1 inline-flex items-center gap-1.5 text-[12.5px] text-slate-500">
@@ -98,7 +98,7 @@ function ProfileForm({ user }) {
                                 ? <Badge tone="emerald" dot>Active</Badge>
                                 : <Badge tone="rose" dot>Deactivated</Badge>}
                         </div>
-                        <p className="mt-5 text-[11.5px] text-slate-600">
+                        <p className="mt-5 text-[11.5px] text-slate-400">
                             Member since {formatDate(user.createdAt)}
                         </p>
                     </Card>
@@ -109,11 +109,11 @@ function ProfileForm({ user }) {
                                 <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">
                                     Profile strength
                                 </p>
-                                <p className="text-[13px] font-semibold tabular-nums text-white">{percent}%</p>
+                                <p className="text-[13px] font-semibold tabular-nums text-slate-900">{percent}%</p>
                             </div>
                             <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-white/8">
                                 <div
-                                    className="h-full rounded-full bg-gradient-to-r from-indigo-500 via-violet-500 to-amber-400 transition-[width] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                                    className="h-full rounded-full bg-brand-600 transition-[width] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
                                     style={{ width: `${percent}%` }}
                                 />
                             </div>
@@ -129,10 +129,10 @@ function ProfileForm({ user }) {
 
                     {isRecruiter && user.verificationStatus !== 'verified' && (
                         <Card className={`animate-rise p-5 ${user.verificationStatus === 'rejected'
-                            ? 'border-rose-400/20 bg-rose-500/[0.05]' : 'border-amber-400/20 bg-amber-400/[0.05]'}`}
+                            ? 'border-rose-200 bg-rose-50' : 'border-amber-200 bg-amber-50'}`}
                             style={{ animationDelay: '100ms' }}>
                             <p className={`text-[13px] leading-relaxed ${user.verificationStatus === 'rejected'
-                                ? 'text-rose-200/90' : 'text-amber-200/90'}`}>
+                                ? 'text-rose-700' : 'text-amber-700'}`}>
                                 {user.verificationStatus === 'rejected'
                                     ? 'The placement cell rejected this account. Reach out to them to appeal.'
                                     : 'Awaiting verification by the placement cell. You can draft jobs once verified.'}
@@ -203,7 +203,7 @@ function ProfileForm({ user }) {
                                     {form.skills.trim() && (
                                         <div className="mt-3 flex flex-wrap gap-1.5">
                                             {form.skills.split(',').map(s => s.trim()).filter(Boolean).map(s => (
-                                                <span key={s} className="rounded-md bg-indigo-500/10 px-2 py-1 text-[11px] text-indigo-300 ring-1 ring-inset ring-indigo-400/20">
+                                                <span key={s} className="rounded-md bg-indigo-50 px-2 py-1 text-[11px] text-indigo-600 ring-1 ring-inset ring-indigo-200">
                                                     {s}
                                                 </span>
                                             ))}
@@ -237,7 +237,7 @@ function ProfileForm({ user }) {
                                     </Field>
                                     {form.companyWebsite && (
                                         <a href={form.companyWebsite} target="_blank" rel="noreferrer noopener"
-                                            className="mt-3 inline-flex items-center gap-1.5 text-[12.5px] text-indigo-300 underline-offset-4 hover:underline">
+                                            className="mt-3 inline-flex items-center gap-1.5 text-[12.5px] text-indigo-600 underline-offset-4 hover:underline">
                                             <IconLink className="size-3.5" /> Preview link
                                         </a>
                                     )}
@@ -246,7 +246,7 @@ function ProfileForm({ user }) {
                         )}
 
                         {user.role === 'admin' && (
-                            <p className="rounded-xl border border-white/8 bg-white/[0.03] px-4 py-3.5 text-[13px] leading-relaxed text-slate-400">
+                            <p className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3.5 text-[13px] leading-relaxed text-slate-500">
                                 <IconUser className="mr-2 inline size-4 text-slate-500" />
                                 Admin accounts carry no additional profile fields.
                             </p>
