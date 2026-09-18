@@ -31,14 +31,14 @@ const LINKS = {
     ],
 }
 
-export function Logo({ className }) {
+export function Logo({ className, dark = false }) {
     return (
-        <Link to="/" className={cx('group flex items-center gap-2.5', className)}>
-            <span className="relative grid size-8 place-items-center rounded-xl bg-gradient-to-br from-indigo-500 via-violet-500 to-amber-400 shadow-[0_6px_18px_-8px_rgba(129,140,248,0.9)]">
-                <IconGrad className="size-[18px] text-slate-950" />
+        <Link to="/" className={cx('flex items-center gap-2.5', className)}>
+            <span className="grid size-8 place-items-center rounded-lg bg-brand-600">
+                <IconGrad className="size-[18px] text-white" />
             </span>
-            <span className="text-[15px] font-semibold tracking-[-0.02em] text-white">
-                Campus<span className="text-indigo-300">Hire</span>
+            <span className={cx('text-[16px] font-extrabold tracking-tight', dark ? 'text-slate-900' : 'text-white')}>
+                Campus<span className="text-brand-600">Hire</span>
             </span>
         </Link>
     )
@@ -72,13 +72,13 @@ export default function Navbar() {
     }
 
     const linkClass = ({ isActive }) => cx(
-        'relative flex items-center gap-2 rounded-lg px-3 py-2 text-[13.5px] font-medium',
+        'relative flex items-center gap-2 rounded-lg px-3 py-2 text-[13.5px] font-semibold',
         'transition-colors duration-200',
-        isActive ? 'text-white' : 'text-slate-400 hover:text-slate-100'
+        isActive ? 'text-white' : 'text-slate-300 hover:text-white'
     )
 
     return (
-        <header className="sticky top-0 z-40 border-b border-white/[0.07] bg-slate-950/72 backdrop-blur-xl">
+        <header className="sticky top-0 z-40 bg-navy-900">
             <nav className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 sm:px-6 lg:px-8">
                 <Logo />
 
@@ -91,12 +91,12 @@ export default function Navbar() {
                                     <Icon className="size-[16px]" />
                                     <span>{label}</span>
                                     {to === '/notifications' && unread > 0 && (
-                                        <span className="ml-0.5 grid min-w-[17px] place-items-center rounded-full bg-amber-400 px-1 text-[10px] font-bold text-slate-950 tabular-nums">
+                                        <span className="ml-0.5 grid min-w-[17px] place-items-center rounded-full bg-brand-500 px-1 text-[10px] font-bold text-white tabular-nums">
                                             {unread > 9 ? '9+' : unread}
                                         </span>
                                     )}
                                     {isActive && (
-                                        <span className="absolute inset-x-2.5 -bottom-[13px] h-px bg-gradient-to-r from-transparent via-indigo-400 to-transparent" />
+                                        <span className="absolute inset-x-2.5 -bottom-[13px] h-[2px] rounded-full bg-brand-400" />
                                     )}
                                 </>
                             )}
@@ -109,26 +109,29 @@ export default function Navbar() {
                         <>
                             <div className="hidden items-center gap-2.5 sm:flex">
                                 <div className="text-right leading-tight">
-                                    <p className="text-[13px] font-medium text-slate-200">
+                                    <p className="text-[13px] font-semibold text-white">
                                         {user.firstName} {user.lastName}
                                     </p>
-                                    <p className="text-[11px] capitalize text-slate-500">
+                                    <p className="text-[11px] capitalize text-slate-400">
                                         {user.role === 'recruiter' && user.companyName
                                             ? user.companyName : user.role}
                                     </p>
                                 </div>
-                                <span className="grid size-9 place-items-center rounded-full bg-gradient-to-br from-indigo-500/25 to-violet-500/15 text-[12.5px] font-semibold text-indigo-200 ring-1 ring-inset ring-white/10">
+                                <span className="grid size-9 place-items-center rounded-full bg-brand-600/20 text-[12.5px] font-bold text-brand-200 ring-1 ring-inset ring-brand-400/25">
                                     {user.firstName?.[0]}{user.lastName?.[0]}
                                 </span>
                             </div>
                             <Button variant="subtle" size="sm" onClick={handleLogout}
-                                className="hidden sm:inline-flex" title="Sign out">
+                                className="hidden !text-slate-300 hover:!bg-white/10 hover:!text-white sm:inline-flex" title="Sign out">
                                 <IconLogout className="size-4" />
                             </Button>
                         </>
                     ) : (
                         <div className="hidden items-center gap-2 sm:flex">
-                            <Button as={Link} to="/login" variant="ghost" size="sm">Sign in</Button>
+                            <Button as={Link} to="/login" variant="ghost" size="sm"
+                                className="!border-white/15 !bg-transparent !text-white hover:!bg-white/10">
+                                Sign in
+                            </Button>
                             <Button as={Link} to="/register" variant="primary" size="sm">Get started</Button>
                         </div>
                     )}
@@ -136,7 +139,7 @@ export default function Navbar() {
                     <button
                         type="button"
                         onClick={() => setOpen(v => !v)}
-                        className="grid size-9 place-items-center rounded-lg text-slate-300 transition-colors hover:bg-white/[0.06] lg:hidden"
+                        className="grid size-9 place-items-center rounded-lg text-slate-300 transition-colors hover:bg-white/10 hover:text-white lg:hidden"
                         aria-label="Toggle navigation"
                         aria-expanded={open}
                     >
@@ -147,43 +150,48 @@ export default function Navbar() {
 
             {/* mobile drawer */}
             {open && (
-                <div className="animate-fade border-t border-white/[0.07] bg-slate-950/95 px-4 pb-5 pt-3 lg:hidden">
+                <div className="animate-fade border-t border-white/10 bg-navy-900 px-4 pb-5 pt-3 lg:hidden">
                     {user ? (
                         <>
-                            <div className="mb-3 flex items-center gap-3 rounded-xl bg-white/[0.04] p-3">
-                                <span className="grid size-10 place-items-center rounded-full bg-gradient-to-br from-indigo-500/25 to-violet-500/15 text-[13px] font-semibold text-indigo-200 ring-1 ring-inset ring-white/10">
+                            <div className="mb-3 flex items-center gap-3 rounded-xl bg-white/5 p-3">
+                                <span className="grid size-10 place-items-center rounded-full bg-brand-600/20 text-[13px] font-bold text-brand-200 ring-1 ring-inset ring-brand-400/25">
                                     {user.firstName?.[0]}{user.lastName?.[0]}
                                 </span>
                                 <div className="min-w-0">
-                                    <p className="truncate text-sm font-medium text-slate-100">
+                                    <p className="truncate text-sm font-semibold text-white">
                                         {user.firstName} {user.lastName}
                                     </p>
-                                    <p className="truncate text-[11.5px] text-slate-500">{user.email}</p>
+                                    <p className="truncate text-[11.5px] text-slate-400">{user.email}</p>
                                 </div>
                             </div>
                             <div className="grid gap-1">
                                 {links.map(({ to, label, icon: Icon }) => (
                                     <NavLink key={to} to={to} end onClick={closeDrawer} className={({ isActive }) => cx(
-                                        'flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-colors',
-                                        isActive ? 'bg-white/[0.07] text-white' : 'text-slate-400 hover:bg-white/[0.04]'
+                                        'flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors',
+                                        isActive ? 'bg-white/10 text-white' : 'text-slate-300 hover:bg-white/5'
                                     )}>
                                         <Icon className="size-[17px]" />
                                         {label}
                                         {to === '/notifications' && unread > 0 && (
-                                            <span className="ml-auto grid min-w-[18px] place-items-center rounded-full bg-amber-400 px-1 text-[10px] font-bold text-slate-950">
+                                            <span className="ml-auto grid min-w-[18px] place-items-center rounded-full bg-brand-500 px-1 text-[10px] font-bold text-white">
                                                 {unread}
                                             </span>
                                         )}
                                     </NavLink>
                                 ))}
                             </div>
-                            <Button variant="ghost" size="sm" className="mt-3 w-full" onClick={handleLogout}>
+                            <Button variant="ghost" size="sm"
+                                className="mt-3 w-full !border-white/15 !bg-transparent !text-white hover:!bg-white/10"
+                                onClick={handleLogout}>
                                 <IconLogout className="size-4" /> Sign out
                             </Button>
                         </>
                     ) : (
                         <div className="grid gap-2">
-                            <Button as={Link} to="/login" variant="ghost" onClick={closeDrawer}>Sign in</Button>
+                            <Button as={Link} to="/login" variant="ghost" onClick={closeDrawer}
+                                className="!border-white/15 !bg-transparent !text-white hover:!bg-white/10">
+                                Sign in
+                            </Button>
                             <Button as={Link} to="/register" variant="primary" onClick={closeDrawer}>Create an account</Button>
                         </div>
                     )}

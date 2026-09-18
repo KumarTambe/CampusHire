@@ -8,7 +8,7 @@ import { PIPELINE } from '../lib/format'
  */
 export default function Pipeline({ status, className, viewer = 'student' }) {
     if (status === 'rejected' || status === 'withdrawn') {
-        const tone = status === 'rejected' ? 'text-rose-300' : 'text-slate-400'
+        const tone = status === 'rejected' ? 'text-rose-600' : 'text-slate-500'
         return (
             <div className={cx('flex items-center gap-2 text-[12.5px]', tone, className)}>
                 <span className={cx('size-1.5 rounded-full', status === 'rejected' ? 'bg-rose-400' : 'bg-slate-500')} />
@@ -38,7 +38,7 @@ export default function Pipeline({ status, className, viewer = 'student' }) {
                             )} />
                             <p className={cx(
                                 'mt-1.5 truncate text-[10.5px] capitalize',
-                                i === current ? 'font-medium text-slate-200' : done ? 'text-slate-500' : 'text-slate-600'
+                                i === current ? 'font-medium text-slate-700' : done ? 'text-slate-500' : 'text-slate-400'
                             )}>
                                 {step}
                             </p>

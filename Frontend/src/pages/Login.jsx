@@ -8,12 +8,6 @@ import { HOME_FOR } from '../components/ProtectedRoute'
 import { Button, Field, Input, Select, PageLoader } from '../components/ui'
 import { IconArrowRight } from '../components/icons'
 
-const HIGHLIGHTS = [
-    'Eligibility checked against your profile automatically',
-    'Every status change notified and logged',
-    'One portal for students, recruiters and the placement cell',
-]
-
 export default function Login() {
     const { user, loading, login } = useAuth()
     const navigate = useNavigate()
@@ -48,10 +42,9 @@ export default function Login() {
 
     return (
         <AuthShell
-            title="Welcome back"
-            subtitle="Sign in to pick up where you left off."
-            highlights={HIGHLIGHTS}
-            footer={<>New here? <Link to="/register" className="font-medium text-indigo-300 underline-offset-4 hover:underline">Create an account</Link></>}
+            title="Welcome Back"
+            subtitle="Login to continue your career journey."
+            footer={<>New here? <Link to="/register" className="font-semibold text-brand-600 underline-offset-4 hover:underline">Create an account</Link></>}
         >
             <form onSubmit={onSubmit} className="space-y-4">
                 <Field label="I am a" required>
