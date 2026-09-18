@@ -101,7 +101,7 @@ export default function MyApplications() {
                                     <div className="flex flex-wrap items-start justify-between gap-4">
                                         <div className="min-w-0">
                                             <Link to={`/jobs/${app.job?._id}`}
-                                                className="text-[15.5px] font-semibold text-white transition-colors hover:text-indigo-200">
+                                                className="text-[15.5px] font-semibold text-slate-900 transition-colors hover:text-indigo-700">
                                                 {app.job?.title || 'Role removed'}
                                             </Link>
                                             <p className="mt-1 text-[12.5px] text-slate-500">
@@ -115,11 +115,11 @@ export default function MyApplications() {
 
                                     <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-[12px] text-slate-500">
                                         <span>Snapshot at apply time:</span>
-                                        <span className="tabular-nums text-slate-400">
+                                        <span className="tabular-nums text-slate-500">
                                             CGPA {app.eligibilitySnapshot?.cgpa ?? '—'}
                                         </span>
-                                        <span className="text-slate-400">{app.eligibilitySnapshot?.branch || '—'}</span>
-                                        <span className="tabular-nums text-slate-400">
+                                        <span className="text-slate-500">{app.eligibilitySnapshot?.branch || '—'}</span>
+                                        <span className="tabular-nums text-slate-500">
                                             Batch {app.eligibilitySnapshot?.graduationYear ?? '—'}
                                         </span>
 
@@ -144,26 +144,26 @@ export default function MyApplications() {
                                             <span className="absolute left-[3px] top-2 bottom-2 w-px bg-white/10" />
                                             <li className="relative">
                                                 <span className="absolute -left-5 top-1.5 size-[7px] rounded-full bg-sky-400 ring-4 ring-sky-400/12" />
-                                                <p className="text-[13px] text-slate-300">
+                                                <p className="text-[13px] text-slate-400">
                                                     Application submitted
                                                 </p>
-                                                <p className="mt-0.5 text-[11.5px] text-slate-600">
+                                                <p className="mt-0.5 text-[11.5px] text-slate-400">
                                                     {formatDateTime(app.createdAt)}
                                                 </p>
                                             </li>
                                             {(app.history || []).map(log => (
                                                 <li key={log._id} className="relative">
-                                                    <span className="absolute -left-5 top-1.5 size-[7px] rounded-full bg-indigo-400 ring-4 ring-indigo-400/12" />
-                                                    <p className="text-[13px] text-slate-300">
+                                                    <span className="absolute -left-5 top-1.5 size-[7px] rounded-full bg-brand-500 ring-4 ring-indigo-400/12" />
+                                                    <p className="text-[13px] text-slate-400">
                                                         <span className="capitalize">{log.oldStatus}</span>
                                                         {' → '}
-                                                        <span className="font-medium capitalize text-white">{log.newStatus}</span>
+                                                        <span className="font-medium capitalize text-slate-900">{log.newStatus}</span>
                                                         <span className="text-slate-500"> by the {log.changedByRole}</span>
                                                     </p>
                                                     {log.reason && (
-                                                        <p className="mt-1 text-[12.5px] italic text-slate-400">“{log.reason}”</p>
+                                                        <p className="mt-1 text-[12.5px] italic text-slate-500">“{log.reason}”</p>
                                                     )}
-                                                    <p className="mt-0.5 text-[11.5px] text-slate-600">
+                                                    <p className="mt-0.5 text-[11.5px] text-slate-400">
                                                         {formatDateTime(log.createdAt)}
                                                     </p>
                                                 </li>

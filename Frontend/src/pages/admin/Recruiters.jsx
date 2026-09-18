@@ -82,11 +82,11 @@ export default function AdminRecruiters() {
                         <Card key={r._id} hover className="animate-rise stagger p-5" style={{ '--i': i }}>
                             <div className="flex items-start justify-between gap-3">
                                 <div className="flex min-w-0 gap-3.5">
-                                    <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-violet-500/22 to-indigo-500/8 text-[13px] font-semibold text-violet-200 ring-1 ring-inset ring-white/10">
+                                    <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-violet-50 text-[13px] font-bold text-violet-700 ring-1 ring-inset ring-violet-100">
                                         {initials(r)}
                                     </span>
                                     <div className="min-w-0">
-                                        <h3 className="truncate text-[15px] font-semibold text-white">
+                                        <h3 className="truncate text-[15px] font-semibold text-slate-900">
                                             {r.companyName || `${r.firstName} ${r.lastName}`}
                                         </h3>
                                         <p className="mt-0.5 truncate text-[12.5px] text-slate-500">
@@ -98,25 +98,25 @@ export default function AdminRecruiters() {
                             </div>
 
                             {r.companyDescription && (
-                                <p className="mt-4 line-clamp-3 text-[13px] leading-relaxed text-slate-400">
+                                <p className="mt-4 line-clamp-3 text-[13px] leading-relaxed text-slate-500">
                                     {r.companyDescription}
                                 </p>
                             )}
 
                             <div className="mt-4 space-y-1.5 text-[12.5px]">
                                 <a href={`mailto:${r.email}`}
-                                    className="flex items-center gap-2 text-slate-500 underline-offset-4 hover:text-slate-300 hover:underline">
+                                    className="flex items-center gap-2 text-slate-500 underline-offset-4 hover:text-slate-400 hover:underline">
                                     <IconMail className="size-3.5 shrink-0" />
                                     <span className="truncate">{r.email}</span>
                                 </a>
                                 {r.companyWebsite && (
                                     <a href={r.companyWebsite} target="_blank" rel="noreferrer noopener"
-                                        className="flex items-center gap-2 text-indigo-300 underline-offset-4 hover:underline">
+                                        className="flex items-center gap-2 text-indigo-600 underline-offset-4 hover:underline">
                                         <IconLink className="size-3.5 shrink-0" />
                                         <span className="truncate">{r.companyWebsite}</span>
                                     </a>
                                 )}
-                                <p className="flex items-center gap-2 text-slate-600">
+                                <p className="flex items-center gap-2 text-slate-400">
                                     <IconBuilding className="size-3.5 shrink-0" />
                                     Signed up {formatDate(r.createdAt)}
                                 </p>

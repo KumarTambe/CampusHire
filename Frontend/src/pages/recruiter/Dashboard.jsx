@@ -83,8 +83,8 @@ export default function RecruiterDashboard() {
             />
 
             {unverified && (
-                <Card className="animate-rise mb-6 border-amber-400/20 bg-amber-400/[0.05] p-4">
-                    <p className="text-[13.5px] leading-relaxed text-amber-200/90">
+                <Card className="animate-rise mb-6 border-amber-200 bg-amber-50 p-4">
+                    <p className="text-[13.5px] leading-relaxed text-amber-700">
                         {user?.verificationStatus === 'rejected'
                             ? 'The placement cell rejected your recruiter account, so posting is disabled. Contact them to appeal.'
                             : 'Your recruiter account is awaiting verification by the placement cell. You can post jobs as soon as it is approved.'}
@@ -137,7 +137,7 @@ export default function RecruiterDashboard() {
                                 <div className="flex flex-wrap items-start justify-between gap-4">
                                     <div className="min-w-0">
                                         <div className="flex flex-wrap items-center gap-2.5">
-                                            <h3 className="text-[15.5px] font-semibold text-white">{job.title}</h3>
+                                            <h3 className="text-[15.5px] font-semibold text-slate-900">{job.title}</h3>
                                             <StatusBadge status={job.status} />
                                         </div>
                                         <p className="mt-1.5 line-clamp-1 text-[13px] text-slate-500">{job.description}</p>
@@ -155,19 +155,19 @@ export default function RecruiterDashboard() {
                                                 <span>{job.eligibility.allowedBranches.join(' · ')}</span>
                                             )}
                                             {deadline && (
-                                                <span className={cx('inline-flex items-center gap-1.5', deadline.urgent && 'text-amber-400/90')}>
+                                                <span className={cx('inline-flex items-center gap-1.5', deadline.urgent && 'text-amber-600')}>
                                                     <IconClock className="size-3.5" />{deadline.label}
                                                 </span>
                                             )}
-                                            <span className="text-slate-600">Posted {formatDate(job.createdAt)}</span>
+                                            <span className="text-slate-400">Posted {formatDate(job.createdAt)}</span>
                                         </div>
                                     </div>
 
                                     <div className="flex shrink-0 flex-col items-end gap-3">
                                         <Link to={`/recruiter/jobs/${job._id}/applicants`}
-                                            className="group flex items-center gap-2 rounded-xl bg-white/[0.04] px-3.5 py-2 ring-1 ring-inset ring-white/8 transition-colors hover:bg-white/[0.07]">
-                                            <IconUsers className="size-4 text-indigo-300" />
-                                            <span className="text-[13px] font-semibold tabular-nums text-white">
+                                            className="group flex items-center gap-2 rounded-xl bg-slate-50 px-3.5 py-2 ring-1 ring-inset ring-slate-200 transition-colors hover:bg-slate-100">
+                                            <IconUsers className="size-4 text-indigo-600" />
+                                            <span className="text-[13px] font-semibold tabular-nums text-slate-900">
                                                 {job.applicantCount}
                                             </span>
                                             <span className="text-[12px] text-slate-500">
@@ -217,10 +217,10 @@ export default function RecruiterDashboard() {
                 }
             >
                 {confirm && (
-                    <div className="flex items-center gap-3 rounded-xl border border-white/8 bg-white/[0.03] px-4 py-3">
+                    <div className="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
                         <IconChart className="size-4 text-slate-500" />
                         <div className="min-w-0">
-                            <p className="truncate text-[13.5px] font-medium text-white">{confirm.job.title}</p>
+                            <p className="truncate text-[13.5px] font-medium text-slate-900">{confirm.job.title}</p>
                             <p className="text-[12px] text-slate-500">
                                 {confirm.job.applicantCount} applicant{confirm.job.applicantCount === 1 ? '' : 's'}
                             </p>

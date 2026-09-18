@@ -98,17 +98,17 @@ export default function AdminUsers() {
                             style={{ '--i': i }}>
                             <div className="flex flex-wrap items-center gap-4">
                                 <span className={cx(
-                                    'grid size-10 shrink-0 place-items-center rounded-xl text-[12.5px] font-semibold ring-1 ring-inset ring-white/10',
-                                    u.role === 'admin' ? 'bg-amber-500/15 text-amber-200'
-                                        : u.role === 'recruiter' ? 'bg-violet-500/15 text-violet-200'
-                                            : 'bg-indigo-500/15 text-indigo-200'
+                                    'grid size-10 shrink-0 place-items-center rounded-xl text-[12.5px] font-semibold ring-1 ring-inset ring-slate-200',
+                                    u.role === 'admin' ? 'bg-amber-50 text-amber-700'
+                                        : u.role === 'recruiter' ? 'bg-violet-50 text-violet-700'
+                                            : 'bg-indigo-50 text-indigo-700'
                                 )}>
                                     {initials(u)}
                                 </span>
 
                                 <div className="min-w-0 flex-1">
                                     <div className="flex flex-wrap items-center gap-2">
-                                        <p className="text-[14px] font-medium text-white">
+                                        <p className="text-[14px] font-medium text-slate-900">
                                             {u.firstName} {u.lastName}
                                         </p>
                                         <Badge tone={u.role === 'admin' ? 'amber' : u.role === 'recruiter' ? 'violet' : 'indigo'}
@@ -117,7 +117,7 @@ export default function AdminUsers() {
                                         {!u.isActive && <Badge tone="rose" dot>Deactivated</Badge>}
                                     </div>
                                     <p className="mt-1 truncate text-[12.5px] text-slate-500">{u.email}</p>
-                                    <p className="mt-0.5 truncate text-[11.5px] text-slate-600">
+                                    <p className="mt-0.5 truncate text-[11.5px] text-slate-400">
                                         {u.role === 'student'
                                             ? [u.college, u.branch, u.cgpa != null && `CGPA ${u.cgpa}`, u.graduationYear]
                                                 .filter(Boolean).join(' · ') || 'Profile incomplete'

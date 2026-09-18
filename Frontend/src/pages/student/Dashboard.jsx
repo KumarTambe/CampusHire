@@ -70,13 +70,13 @@ export default function StudentDashboard() {
             />
 
             {missing.length > 0 && (
-                <Card className="animate-rise mb-6 flex flex-col gap-3 border-amber-400/20 bg-amber-400/[0.05] p-4 sm:flex-row sm:items-center sm:justify-between">
-                    <p className="text-[13.5px] leading-relaxed text-amber-200/90">
+                <Card className="animate-rise mb-6 flex flex-col gap-3 border-amber-200 bg-amber-50 p-4 sm:flex-row sm:items-center sm:justify-between">
+                    <p className="text-[13.5px] leading-relaxed text-amber-700">
                         Your profile is missing <strong className="font-semibold">{missing.join(', ')}</strong>.
                         Jobs that filter on those fields will show as ineligible until you add them.
                     </p>
                     <Link to="/profile"
-                        className="shrink-0 text-[13px] font-medium text-amber-300 underline-offset-4 hover:underline">
+                        className="shrink-0 text-[13px] font-medium text-amber-600 underline-offset-4 hover:underline">
                         Complete profile →
                     </Link>
                 </Card>

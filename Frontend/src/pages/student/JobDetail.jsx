@@ -15,11 +15,11 @@ import { companyOf, formatDate, relativeDeadline } from '../../lib/format'
 const Criterion = ({ met, label }) => (
     <li className="flex items-start gap-2.5 text-[13.5px] leading-relaxed">
         <span className={`mt-0.5 grid size-[18px] shrink-0 place-items-center rounded-full ring-1 ring-inset ${met
-            ? 'bg-emerald-500/12 text-emerald-400 ring-emerald-400/25'
-            : 'bg-rose-500/12 text-rose-400 ring-rose-400/25'}`}>
+            ? 'bg-emerald-50 text-emerald-400 ring-emerald-200'
+            : 'bg-rose-50 text-rose-400 ring-rose-200'}`}>
             {met ? <IconCheck className="size-2.5" /> : <IconX className="size-2.5" />}
         </span>
-        <span className={met ? 'text-slate-300' : 'text-slate-400'}>{label}</span>
+        <span className={met ? 'text-slate-400' : 'text-slate-500'}>{label}</span>
     </li>
 )
 
@@ -116,14 +116,14 @@ function JobDetailView({ id }) {
                     <Card className="animate-rise p-6 sm:p-7">
                         <div className="flex flex-wrap items-start justify-between gap-4">
                             <div className="flex min-w-0 items-start gap-4">
-                                <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-indigo-500/20 to-violet-500/8 text-indigo-300 ring-1 ring-inset ring-white/10">
+                                <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-brand-50 text-brand-600 ring-1 ring-inset ring-brand-100">
                                     <IconBuilding className="size-5" />
                                 </span>
                                 <div className="min-w-0">
-                                    <h1 className="text-[24px] font-semibold leading-tight tracking-[-0.025em] text-white sm:text-[28px]">
+                                    <h1 className="text-[24px] font-semibold leading-tight tracking-[-0.025em] text-slate-900 sm:text-[28px]">
                                         {job.title}
                                     </h1>
-                                    <p className="mt-1.5 text-[14px] text-slate-400">{companyOf(job)}</p>
+                                    <p className="mt-1.5 text-[14px] text-slate-500">{companyOf(job)}</p>
                                 </div>
                             </div>
                             {isStudent && (
@@ -139,9 +139,9 @@ function JobDetailView({ id }) {
                         <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-[12.5px] text-slate-500">
                             {job.location && <span className="inline-flex items-center gap-1.5"><IconPin className="size-3.5" />{job.location}</span>}
                             {job.jobType && <span className="capitalize">{job.jobType.replace('-', ' ')}</span>}
-                            {job.salary && <span className="text-slate-400">{job.salary}</span>}
+                            {job.salary && <span className="text-slate-500">{job.salary}</span>}
                             {deadline && (
-                                <span className={`inline-flex items-center gap-1.5 ${deadline.urgent ? 'text-amber-400/90' : ''}`}>
+                                <span className={`inline-flex items-center gap-1.5 ${deadline.urgent ? 'text-amber-600' : ''}`}>
                                     <IconClock className="size-3.5" />
                                     {deadline.label} · closes {formatDate(job.applicationDeadline)}
                                 </span>
@@ -153,7 +153,7 @@ function JobDetailView({ id }) {
                         <h2 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">
                             About the role
                         </h2>
-                        <p className="mt-3 whitespace-pre-line text-[14.5px] leading-[1.75] text-slate-300">
+                        <p className="mt-3 whitespace-pre-line text-[14.5px] leading-[1.75] text-slate-400">
                             {job.description}
                         </p>
 
@@ -167,15 +167,15 @@ function JobDetailView({ id }) {
                                         const has = user?.skills?.some(s => s.toLowerCase() === skill.toLowerCase())
                                         return (
                                             <span key={skill} className={`rounded-lg px-2.5 py-1.5 text-[12px] ring-1 ring-inset ${has
-                                                ? 'bg-indigo-500/12 text-indigo-300 ring-indigo-400/25'
-                                                : 'bg-white/[0.04] text-slate-400 ring-white/8'}`}>
+                                                ? 'bg-indigo-50 text-indigo-700 ring-indigo-200'
+                                                : 'bg-slate-50 text-slate-500 ring-slate-200'}`}>
                                                 {skill}
                                             </span>
                                         )
                                     })}
                                 </div>
                                 {isStudent && (
-                                    <p className="mt-2.5 text-[11.5px] text-slate-600">
+                                    <p className="mt-2.5 text-[11.5px] text-slate-400">
                                         Highlighted skills are ones already on your profile.
                                     </p>
                                 )}
@@ -188,12 +188,12 @@ function JobDetailView({ id }) {
                             <h2 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">
                                 About {companyOf(job)}
                             </h2>
-                            <p className="mt-3 text-[14px] leading-relaxed text-slate-400">
+                            <p className="mt-3 text-[14px] leading-relaxed text-slate-500">
                                 {job.postedBy.companyDescription}
                             </p>
                             {job.postedBy.companyWebsite && (
                                 <a href={job.postedBy.companyWebsite} target="_blank" rel="noreferrer noopener"
-                                    className="mt-4 inline-flex items-center gap-1.5 text-[13px] text-indigo-300 underline-offset-4 hover:underline">
+                                    className="mt-4 inline-flex items-center gap-1.5 text-[13px] text-indigo-600 underline-offset-4 hover:underline">
                                     <IconLink className="size-3.5" /> {job.postedBy.companyWebsite}
                                 </a>
                             )}
@@ -209,7 +209,7 @@ function JobDetailView({ id }) {
                         </h2>
 
                         {criteria.length === 0 ? (
-                            <p className="mt-3.5 text-[13.5px] leading-relaxed text-slate-400">
+                            <p className="mt-3.5 text-[13.5px] leading-relaxed text-slate-500">
                                 This role is open to every student — no CGPA, branch or batch restrictions.
                             </p>
                         ) : (
@@ -232,14 +232,14 @@ function JobDetailView({ id }) {
                                         </p>
                                         {job.alreadyApplied && (
                                             <Link to="/my-applications"
-                                                className="mt-3 block text-center text-[13px] text-indigo-300 underline-offset-4 hover:underline">
+                                                className="mt-3 block text-center text-[13px] text-indigo-600 underline-offset-4 hover:underline">
                                                 Track this application →
                                             </Link>
                                         )}
                                         {!job.isEligible && !job.alreadyApplied && job.ineligibilityReasons?.length > 0 && (
-                                            <ul className="mt-4 space-y-1.5 rounded-xl border border-rose-500/15 bg-rose-500/[0.05] p-3.5">
+                                            <ul className="mt-4 space-y-1.5 rounded-xl border border-rose-200 bg-rose-50 p-3.5">
                                                 {job.ineligibilityReasons.map(r => (
-                                                    <li key={r} className="text-[12.5px] leading-relaxed text-rose-200/80">• {r}</li>
+                                                    <li key={r} className="text-[12.5px] leading-relaxed text-rose-700">• {r}</li>
                                                 ))}
                                             </ul>
                                         )}
@@ -272,7 +272,7 @@ function JobDetailView({ id }) {
                             ].map(([k, v, cap]) => (
                                 <div key={k} className="flex items-baseline justify-between gap-4">
                                     <dt className="text-slate-500">{k}</dt>
-                                    <dd className={cx('text-right text-slate-300', cap && 'capitalize')}>{v}</dd>
+                                    <dd className={cx('text-right text-slate-400', cap && 'capitalize')}>{v}</dd>
                                 </div>
                             ))}
                         </dl>
@@ -297,9 +297,9 @@ function JobDetailView({ id }) {
                 <div className="grid grid-cols-3 gap-3">
                     {[['CGPA', user?.cgpa ?? '—'], ['Branch', user?.branch || '—'], ['Batch', user?.graduationYear || '—']]
                         .map(([k, v]) => (
-                            <div key={k} className="rounded-xl border border-white/8 bg-white/[0.03] p-3.5 text-center">
+                            <div key={k} className="rounded-xl border border-slate-200 bg-slate-50 p-3.5 text-center">
                                 <p className="text-[10.5px] uppercase tracking-[0.14em] text-slate-500">{k}</p>
-                                <p className="mt-1.5 text-[16px] font-semibold text-white">{v}</p>
+                                <p className="mt-1.5 text-[16px] font-semibold text-slate-900">{v}</p>
                             </div>
                         ))}
                 </div>

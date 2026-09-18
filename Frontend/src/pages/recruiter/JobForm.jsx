@@ -173,8 +173,8 @@ export default function JobForm() {
                                             className={cx(
                                                 'rounded-lg px-3 py-1.5 text-[12.5px] ring-1 ring-inset transition-all duration-200',
                                                 on
-                                                    ? 'bg-indigo-500/15 text-indigo-200 ring-indigo-400/35'
-                                                    : 'bg-white/[0.03] text-slate-400 ring-white/8 hover:bg-white/[0.06] hover:text-slate-200'
+                                                    ? 'bg-indigo-50 text-indigo-700 ring-indigo-300'
+                                                    : 'bg-slate-50 text-slate-500 ring-slate-200 hover:bg-slate-100 hover:text-slate-700'
                                             )}
                                         >
                                             {branch}
@@ -220,7 +220,7 @@ export default function JobForm() {
                             Who can apply
                         </h2>
                         {openToAll ? (
-                            <p className="mt-3.5 text-[13.5px] leading-relaxed text-slate-400">
+                            <p className="mt-3.5 text-[13.5px] leading-relaxed text-slate-500">
                                 Every student on CampusHire. Add criteria on the left to narrow it.
                             </p>
                         ) : (
@@ -228,13 +228,13 @@ export default function JobForm() {
                                 {form.minCGPA > 0 && (
                                     <li className="flex justify-between gap-3">
                                         <span className="text-slate-500">CGPA</span>
-                                        <span className="tabular-nums text-slate-200">≥ {form.minCGPA}</span>
+                                        <span className="tabular-nums text-slate-700">≥ {form.minCGPA}</span>
                                     </li>
                                 )}
                                 {form.graduationYear && (
                                     <li className="flex justify-between gap-3">
                                         <span className="text-slate-500">Batch</span>
-                                        <span className="tabular-nums text-slate-200">{form.graduationYear}</span>
+                                        <span className="tabular-nums text-slate-700">{form.graduationYear}</span>
                                     </li>
                                 )}
                                 {form.allowedBranches.length > 0 && (
@@ -264,7 +264,7 @@ export default function JobForm() {
                                 </Button>
                             )}
                         </div>
-                        <p className="mt-3.5 text-center text-[11.5px] leading-relaxed text-slate-600">
+                        <p className="mt-3.5 text-center text-[11.5px] leading-relaxed text-slate-400">
                             Drafts stay private to you. Publishing makes the role visible to every eligible student.
                         </p>
                     </Card>
@@ -277,7 +277,7 @@ export default function JobForm() {
                                     dot className="capitalize">{status}</Badge>
                             </div>
                             <Link to={`/recruiter/jobs/${id}/applicants`}
-                                className="mt-4 block text-[13px] text-indigo-300 underline-offset-4 hover:underline">
+                                className="mt-4 block text-[13px] text-indigo-600 underline-offset-4 hover:underline">
                                 View applicants →
                             </Link>
                         </Card>

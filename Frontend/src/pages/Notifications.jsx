@@ -79,25 +79,25 @@ export default function Notifications() {
                             key={n._id}
                             className={cx(
                                 'animate-rise stagger flex items-start gap-4 p-4 transition-colors',
-                                !n.read && 'border-indigo-400/22 bg-indigo-500/[0.045]'
+                                !n.read && 'border-brand-200 bg-brand-50'
                             )}
                             style={{ '--i': i }}
                         >
                             <span className={cx(
                                 'mt-0.5 grid size-9 shrink-0 place-items-center rounded-xl ring-1 ring-inset',
                                 n.read
-                                    ? 'bg-white/[0.04] text-slate-500 ring-white/8'
-                                    : 'bg-indigo-500/15 text-indigo-300 ring-indigo-400/25'
+                                    ? 'bg-slate-50 text-slate-500 ring-slate-200'
+                                    : 'bg-indigo-50 text-indigo-600 ring-indigo-200'
                             )}>
                                 <IconBell className="size-[17px]" />
                             </span>
 
                             <div className="min-w-0 flex-1">
                                 <p className={cx('text-[13.5px] leading-relaxed',
-                                    n.read ? 'text-slate-400' : 'text-slate-200')}>
+                                    n.read ? 'text-slate-500' : 'text-slate-700')}>
                                     {n.message}
                                 </p>
-                                <p className="mt-1 text-[11.5px] text-slate-600" title={formatDateTime(n.createdAt)}>
+                                <p className="mt-1 text-[11.5px] text-slate-400" title={formatDateTime(n.createdAt)}>
                                     {timeAgo(n.createdAt)}
                                 </p>
                             </div>
