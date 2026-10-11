@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import api, { errorMessage } from '../../lib/api'
 import {
-    Badge, Card, EmptyState, Input, PageHeader, Skeleton, StatusBadge, Tabs
+    Card, EmptyState, Input, PageHeader, Skeleton, StatusBadge, Tabs
 } from '../../components/ui'
 import { IconBriefcase, IconSearch, IconUsers, IconClock, IconPin } from '../../components/icons'
 import { companyOf, formatDate, relativeDeadline } from '../../lib/format'
@@ -46,21 +46,21 @@ export default function AdminJobs() {
                 subtitle="Every posting on CampusHire, including drafts that students cannot see."
                 actions={
                     <div className="relative w-full sm:w-72">
-                        <IconSearch className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-slate-500" />
+                        <IconSearch className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-zinc-500" />
                         <Input className="pl-9" placeholder="Search title, company"
                             value={query} onChange={e => setQuery(e.target.value)} />
                     </div>
                 }
             />
 
-            <div className="mb-6 flex flex-wrap items-center gap-3">
-                <Tabs value={tab} onChange={setTab} tabs={[
+            <div className="mb-6 flex items-end gap-4 border-b border-zinc-200">
+                <Tabs className="flex-1 border-b-0" value={tab} onChange={setTab} tabs={[
                     { value: 'all', label: 'All', count: counts.all },
                     { value: 'published', label: 'Live', count: counts.published },
                     { value: 'draft', label: 'Drafts', count: counts.draft },
                     { value: 'closed', label: 'Closed', count: counts.closed },
                 ]} />
-                {!loading && <Badge tone="neutral">{visible.length} shown</Badge>}
+                {!loading && <p className="shrink-0 pb-2.5 text-[12.5px] text-zinc-500">{visible.length} shown</p>}
             </div>
 
             {loading ? (
@@ -72,28 +72,28 @@ export default function AdminJobs() {
                     description="Try a different search term or switch tabs." />
             ) : (
                 <div className="space-y-2.5">
-                    {visible.map((job, i) => {
+                    {visible.map((job) => {
                         const deadline = relativeDeadline(job.applicationDeadline)
                         return (
-                            <Card key={job._id} hover className="animate-rise stagger p-5" style={{ '--i': i }}>
+                            <Card key={job._id} hover className="p-5">
                                 <div className="flex flex-wrap items-start justify-between gap-4">
                                     <div className="min-w-0">
                                         <div className="flex flex-wrap items-center gap-2.5">
                                             {job.status === 'published' ? (
                                                 <Link to={`/jobs/${job._id}`}
-                                                    className="text-[15px] font-semibold text-slate-900 transition-colors hover:text-indigo-700">
+                                                    className="text-[15px] font-semibold text-zinc-900 transition-colors hover:text-brand-700">
                                                     {job.title}
                                                 </Link>
                                             ) : (
-                                                <span className="text-[15px] font-semibold text-slate-900">{job.title}</span>
+                                                <span className="text-[15px] font-semibold text-zinc-900">{job.title}</span>
                                             )}
                                             <StatusBadge status={job.status} />
                                         </div>
-                                        <p className="mt-1 text-[12.5px] text-slate-500">
+                                        <p className="mt-1 text-[12.5px] text-zinc-500">
                                             {companyOf(job)}
-                                            {job.postedBy?.email && <span className="text-slate-400"> · {job.postedBy.email}</span>}
+                                            {job.postedBy?.email && <span className="text-zinc-400"> · {job.postedBy.email}</span>}
                                         </p>
-                                        <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[11.5px] text-slate-400">
+                                        <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[11.5px] text-zinc-400">
                                             {job.location && (
                                                 <span className="inline-flex items-center gap-1.5">
                                                     <IconPin className="size-3.5" />{job.location}
@@ -112,12 +112,12 @@ export default function AdminJobs() {
                                         </div>
                                     </div>
 
-                                    <div className="flex shrink-0 items-center gap-2 rounded-xl bg-slate-50 px-3.5 py-2 ring-1 ring-inset ring-slate-200">
-                                        <IconUsers className="size-4 text-indigo-600" />
-                                        <span className="text-[13px] font-semibold tabular-nums text-slate-900">
+                                    <div className="flex shrink-0 items-center gap-2 rounded-xl bg-zinc-50 px-3.5 py-2 ring-1 ring-inset ring-zinc-200">
+                                        <IconUsers className="size-4 text-brand-600" />
+                                        <span className="text-[13px] font-semibold tabular-nums text-zinc-900">
                                             {job.applicantCount}
                                         </span>
-                                        <span className="text-[12px] text-slate-500">
+                                        <span className="text-[12px] text-zinc-500">
                                             applicant{job.applicantCount === 1 ? '' : 's'}
                                         </span>
                                     </div>

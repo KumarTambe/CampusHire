@@ -10,8 +10,8 @@ import {
 import { APPLICATION_STATUSES } from '../../lib/format'
 
 const BAR_COLOR = {
-    applied: 'bg-sky-400', shortlisted: 'bg-brand-500', interview: 'bg-violet-400',
-    selected: 'bg-emerald-400', rejected: 'bg-rose-400', withdrawn: 'bg-slate-500',
+    applied: 'bg-zinc-400', shortlisted: 'bg-sky-500', interview: 'bg-brand-600',
+    selected: 'bg-emerald-400', rejected: 'bg-rose-400', withdrawn: 'bg-zinc-500',
 }
 
 const SHORTCUTS = [
@@ -63,8 +63,8 @@ export default function AdminDashboard() {
 
                     {stats.pendingRecruiters > 0 && (
                         <Link to="/admin/recruiters" className="mt-5 block">
-                            <Card hover className="animate-rise flex items-center gap-4 border-amber-200 bg-amber-50 p-5">
-                                <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-amber-50 text-amber-600 ring-1 ring-inset ring-amber-200">
+                            <Card hover className="flex items-center gap-4 border-amber-200 bg-amber-50 p-5">
+                                <span className="grid size-10 shrink-0 place-items-center rounded-md bg-amber-100 text-amber-700">
                                     <IconShield className="size-5" />
                                 </span>
                                 <div className="min-w-0">
@@ -81,16 +81,16 @@ export default function AdminDashboard() {
                     )}
 
                     <div className="mt-5 grid gap-5 lg:grid-cols-[minmax(0,1fr)_340px]">
-                        <Card className="animate-rise p-6">
+                        <Card className="p-6">
                             <div className="flex items-center gap-2.5">
-                                <IconChart className="size-4 text-slate-500" />
-                                <h2 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">
+                                <IconChart className="size-4 text-zinc-500" />
+                                <h2 className="text-[14px] font-semibold text-zinc-900">
                                     Applications by stage
                                 </h2>
                             </div>
 
                             {stats.applications === 0 ? (
-                                <p className="mt-5 text-[13.5px] text-slate-500">
+                                <p className="mt-5 text-[13.5px] text-zinc-500">
                                     No applications have been submitted yet.
                                 </p>
                             ) : (
@@ -101,10 +101,10 @@ export default function AdminDashboard() {
                                         return (
                                             <div key={status}>
                                                 <div className="flex items-baseline justify-between gap-3">
-                                                    <span className="text-[13px] capitalize text-slate-400">{status}</span>
-                                                    <span className="text-[13px] font-semibold tabular-nums text-slate-900">{count}</span>
+                                                    <span className="text-[13px] capitalize text-zinc-400">{status}</span>
+                                                    <span className="text-[13px] font-semibold tabular-nums text-zinc-900">{count}</span>
                                                 </div>
-                                                <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-slate-100">
+                                                <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-zinc-100">
                                                     <div
                                                         className={cx('h-full rounded-full transition-[width] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]', BAR_COLOR[status])}
                                                         style={{ width: `${pct}%` }}
@@ -118,17 +118,17 @@ export default function AdminDashboard() {
                         </Card>
 
                         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
-                            {SHORTCUTS.map(({ to, label, body, icon: Icon }, i) => (
+                            {SHORTCUTS.map(({ to, label, body, icon: Icon }) => (
                                 <Link key={to} to={to} className="group block">
-                                    <Card hover className="animate-rise stagger flex items-center gap-3.5 p-4" style={{ '--i': i }}>
-                                        <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200 transition-colors group-hover:text-indigo-600">
+                                    <Card hover className="flex items-center gap-3.5 p-4">
+                                        <span className="grid size-9 shrink-0 place-items-center rounded-md border border-zinc-200 bg-zinc-50 text-zinc-500 transition-colors group-hover:text-brand-600">
                                             <Icon className="size-[17px]" />
                                         </span>
                                         <div className="min-w-0">
-                                            <p className="text-[13.5px] font-medium text-slate-800">{label}</p>
-                                            <p className="truncate text-[11.5px] text-slate-500">{body}</p>
+                                            <p className="text-[13.5px] font-medium text-zinc-800">{label}</p>
+                                            <p className="truncate text-[11.5px] text-zinc-500">{body}</p>
                                         </div>
-                                        <IconArrowRight className="ml-auto size-4 shrink-0 text-slate-700 transition-all group-hover:translate-x-0.5 group-hover:text-brand-600" />
+                                        <IconArrowRight className="ml-auto size-4 shrink-0 text-zinc-700 transition-all group-hover:translate-x-0.5 group-hover:text-brand-600" />
                                     </Card>
                                 </Link>
                             ))}

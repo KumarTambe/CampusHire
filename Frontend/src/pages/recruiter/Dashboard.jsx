@@ -83,7 +83,7 @@ export default function RecruiterDashboard() {
             />
 
             {unverified && (
-                <Card className="animate-rise mb-6 border-amber-200 bg-amber-50 p-4">
+                <Card className="mb-6 border-amber-200 bg-amber-50 p-4">
                     <p className="text-[13.5px] leading-relaxed text-amber-700">
                         {user?.verificationStatus === 'rejected'
                             ? 'The placement cell rejected your recruiter account, so posting is disabled. Contact them to appeal.'
@@ -100,7 +100,7 @@ export default function RecruiterDashboard() {
             </div>
 
             <Tabs
-                className="mb-6 max-w-md"
+                className="mb-6"
                 value={filter}
                 onChange={setFilter}
                 tabs={[
@@ -130,19 +130,19 @@ export default function RecruiterDashboard() {
                 />
             ) : (
                 <div className="space-y-3">
-                    {visible.map((job, i) => {
+                    {visible.map((job) => {
                         const deadline = relativeDeadline(job.applicationDeadline)
                         return (
-                            <Card key={job._id} hover className="animate-rise stagger p-5" style={{ '--i': i }}>
+                            <Card key={job._id} hover className="p-5">
                                 <div className="flex flex-wrap items-start justify-between gap-4">
                                     <div className="min-w-0">
                                         <div className="flex flex-wrap items-center gap-2.5">
-                                            <h3 className="text-[15.5px] font-semibold text-slate-900">{job.title}</h3>
+                                            <h3 className="text-[15.5px] font-semibold text-zinc-900">{job.title}</h3>
                                             <StatusBadge status={job.status} />
                                         </div>
-                                        <p className="mt-1.5 line-clamp-1 text-[13px] text-slate-500">{job.description}</p>
+                                        <p className="mt-1.5 line-clamp-1 text-[13px] text-zinc-500">{job.description}</p>
 
-                                        <div className="mt-3.5 flex flex-wrap items-center gap-x-4 gap-y-2 text-[12px] text-slate-500">
+                                        <div className="mt-3.5 flex flex-wrap items-center gap-x-4 gap-y-2 text-[12px] text-zinc-500">
                                             {job.location && (
                                                 <span className="inline-flex items-center gap-1.5">
                                                     <IconPin className="size-3.5" />{job.location}
@@ -159,18 +159,18 @@ export default function RecruiterDashboard() {
                                                     <IconClock className="size-3.5" />{deadline.label}
                                                 </span>
                                             )}
-                                            <span className="text-slate-400">Posted {formatDate(job.createdAt)}</span>
+                                            <span className="text-zinc-400">Posted {formatDate(job.createdAt)}</span>
                                         </div>
                                     </div>
 
                                     <div className="flex shrink-0 flex-col items-end gap-3">
                                         <Link to={`/recruiter/jobs/${job._id}/applicants`}
-                                            className="group flex items-center gap-2 rounded-xl bg-slate-50 px-3.5 py-2 ring-1 ring-inset ring-slate-200 transition-colors hover:bg-slate-100">
-                                            <IconUsers className="size-4 text-indigo-600" />
-                                            <span className="text-[13px] font-semibold tabular-nums text-slate-900">
+                                            className="group flex items-center gap-2 rounded-xl bg-zinc-50 px-3.5 py-2 ring-1 ring-inset ring-zinc-200 transition-colors hover:bg-zinc-100">
+                                            <IconUsers className="size-4 text-brand-600" />
+                                            <span className="text-[13px] font-semibold tabular-nums text-zinc-900">
                                                 {job.applicantCount}
                                             </span>
-                                            <span className="text-[12px] text-slate-500">
+                                            <span className="text-[12px] text-zinc-500">
                                                 applicant{job.applicantCount === 1 ? '' : 's'}
                                             </span>
                                         </Link>
@@ -217,11 +217,11 @@ export default function RecruiterDashboard() {
                 }
             >
                 {confirm && (
-                    <div className="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
-                        <IconChart className="size-4 text-slate-500" />
+                    <div className="flex items-center gap-3 rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3">
+                        <IconChart className="size-4 text-zinc-500" />
                         <div className="min-w-0">
-                            <p className="truncate text-[13.5px] font-medium text-slate-900">{confirm.job.title}</p>
-                            <p className="text-[12px] text-slate-500">
+                            <p className="truncate text-[13.5px] font-medium text-zinc-900">{confirm.job.title}</p>
+                            <p className="text-[12px] text-zinc-500">
                                 {confirm.job.applicantCount} applicant{confirm.job.applicantCount === 1 ? '' : 's'}
                             </p>
                         </div>

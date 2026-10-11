@@ -115,27 +115,27 @@ export default function Applicants() {
                 />
             ) : (
                 <div className="space-y-3">
-                    {visible.map((app, i) => {
+                    {visible.map((app) => {
                         const student = app.student || {}
                         const next = RECRUITER_NEXT[app.status] || []
                         const snap = app.eligibilitySnapshot || {}
 
                         return (
-                            <Card key={app._id} className="animate-rise stagger p-5" style={{ '--i': i }}>
+                            <Card key={app._id} className="p-5">
                                 <div className="flex flex-wrap items-start justify-between gap-4">
                                     <div className="flex min-w-0 gap-4">
-                                        <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-brand-50 text-[13px] font-bold text-brand-700 ring-1 ring-inset ring-brand-100">
+                                        <span className="grid size-11 shrink-0 place-items-center rounded-full border border-zinc-200 bg-zinc-100 text-[13px] font-semibold text-zinc-700">
                                             {initials(student)}
                                         </span>
                                         <div className="min-w-0">
-                                            <h3 className="text-[15px] font-semibold text-slate-900">
+                                            <h3 className="text-[15px] font-semibold text-zinc-900">
                                                 {student.firstName} {student.lastName}
                                             </h3>
                                             <a href={`mailto:${student.email}`}
-                                                className="mt-1 inline-flex items-center gap-1.5 text-[12.5px] text-slate-500 underline-offset-4 hover:text-slate-400 hover:underline">
+                                                className="mt-1 inline-flex items-center gap-1.5 text-[12.5px] text-zinc-500 underline-offset-4 hover:text-zinc-400 hover:underline">
                                                 <IconMail className="size-3.5" /> {student.email}
                                             </a>
-                                            <p className="mt-1 text-[11.5px] text-slate-400">
+                                            <p className="mt-1 text-[11.5px] text-zinc-400">
                                                 Applied {timeAgo(app.createdAt)} · {formatDate(app.createdAt)}
                                             </p>
                                         </div>
@@ -151,9 +151,9 @@ export default function Applicants() {
                                         ['Batch', snap.graduationYear ?? student.graduationYear ?? '—'],
                                         ['College', student.college || '—'],
                                     ].map(([k, v]) => (
-                                        <div key={k} className="rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5">
-                                            <p className="text-[10px] uppercase tracking-[0.14em] text-slate-400">{k}</p>
-                                            <p className="mt-1 truncate text-[13.5px] font-medium text-slate-700">{v}</p>
+                                        <div key={k} className="rounded-xl border border-zinc-200 bg-zinc-50 px-3.5 py-2.5">
+                                            <p className="text-[11.5px] text-zinc-500">{k}</p>
+                                            <p className="mt-1 truncate text-[13.5px] font-medium text-zinc-700">{v}</p>
                                         </div>
                                     ))}
                                 </div>
@@ -168,7 +168,7 @@ export default function Applicants() {
                                                     'rounded-md px-2 py-1 text-[11px] ring-1 ring-inset',
                                                     wanted
                                                         ? 'bg-emerald-50 text-emerald-700 ring-emerald-200'
-                                                        : 'bg-slate-50 text-slate-500 ring-slate-200'
+                                                        : 'bg-zinc-50 text-zinc-500 ring-zinc-200'
                                                 )}>
                                                     {skill}
                                                 </span>
@@ -188,7 +188,7 @@ export default function Applicants() {
                                     )}
                                     <div className="ml-auto flex flex-wrap items-center justify-end gap-2">
                                         {next.length === 0 ? (
-                                            <span className="text-[12px] text-slate-400">
+                                            <span className="text-[12px] text-zinc-400">
                                                 No further action available
                                             </span>
                                         ) : next.map(status => {

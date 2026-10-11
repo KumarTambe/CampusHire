@@ -1,3 +1,4 @@
+import mongoose from 'mongoose'
 import Application from '../models/Application.js'
 import Job from '../models/Job.js'
 import Notification from '../models/Notification.js'
@@ -29,23 +30,32 @@ export async function applyToJob(req, res) {
         if (existing) return res.status(409).json({ message: 'You have already applied to this job' })
 
         // freeze the student's numbers at the moment of applying, so later
-        // profile edits never rewrite the record the recruiter reviewed
-        const application = await Application.create({
-            student: req.user._id,
-            job: job._id,
-            status: 'applied',
-            eligibilitySnapshot: {
-                cgpa: req.user.cgpa,
-                branch: req.user.branch,
-                graduationYear: req.user.graduationYear,
-            }
-        })
+        // profile edits never rewrite the record the recruiter reviewed.
+        // The application and the recruiter's notification commit together.
+        let application
+        const session = await mongoose.startSession()
+        try {
+            await session.withTransaction(async () => {
+                ;[application] = await Application.create([{
+                    student: req.user._id,
+                    job: job._id,
+                    status: 'applied',
+                    eligibilitySnapshot: {
+                        cgpa: req.user.cgpa,
+                        branch: req.user.branch,
+                        graduationYear: req.user.graduationYear,
+                    }
+                }], { session })
 
-        await Notification.create({
-            user: job.postedBy._id,
-            message: `${fullName(req.user)} applied to your job "${job.title}".`,
-            application: application._id,
-        })
+                await Notification.create([{
+                    user: job.postedBy._id,
+                    message: `${fullName(req.user)} applied to your job "${job.title}".`,
+                    application: application._id,
+                }], { session })
+            })
+        } finally {
+            await session.endSession()
+        }
 
         res.status(201).json(application)
     } catch (err) {
@@ -105,7 +115,8 @@ export async function getApplicationsForJob(req, res) {
 
 /**
  * Shared status-change path for PUT /:id/status and PUT /:id/withdraw.
- * Validates the transition, writes an audit log and notifies the other party.
+ * Validates the transition, then saves the status, writes an audit log and notifies
+ * the other party in a single MongoDB transaction (requires a replica set, e.g. Atlas).
  */
 async function changeStatus({ application, newStatus, actor, reason, res }) {
     const oldStatus = application.status
@@ -113,37 +124,45 @@ async function changeStatus({ application, newStatus, actor, reason, res }) {
     const check = canTransition(oldStatus, newStatus, actor.role)
     if (!check.ok) return res.status(409).json({ message: check.message })
 
-    application.status = newStatus
-    await application.save()
-
-    await AuditLog.create({
-        application: application._id,
-        changedBy: actor._id,
-        changedByRole: actor.role,
-        oldStatus,
-        newStatus,
-        reason,
-    })
-
     const job = application.job
     const jobTitle = job?.title || 'a job'
 
-    if (actor.role === 'student') {
-        // student withdrew — tell the recruiter who owns the job
-        if (job?.postedBy) {
-            await Notification.create({
-                user: job.postedBy._id || job.postedBy,
-                message: `${fullName(actor)} withdrew their application for "${jobTitle}".`,
+    // status change, audit log and notification commit or roll back together
+    const session = await mongoose.startSession()
+    try {
+        await session.withTransaction(async () => {
+            application.status = newStatus
+            await application.save({ session })
+
+            await AuditLog.create([{
                 application: application._id,
-            })
-        }
-    } else {
-        await Notification.create({
-            user: application.student._id || application.student,
-            message: `Your application for "${jobTitle}" moved from ${oldStatus} to ${newStatus}.`
-                + (reason ? ` Note: ${reason}` : ''),
-            application: application._id,
+                changedBy: actor._id,
+                changedByRole: actor.role,
+                oldStatus,
+                newStatus,
+                reason,
+            }], { session })
+
+            if (actor.role === 'student') {
+                // student withdrew — tell the recruiter who owns the job
+                if (job?.postedBy) {
+                    await Notification.create([{
+                        user: job.postedBy._id || job.postedBy,
+                        message: `${fullName(actor)} withdrew their application for "${jobTitle}".`,
+                        application: application._id,
+                    }], { session })
+                }
+            } else {
+                await Notification.create([{
+                    user: application.student._id || application.student,
+                    message: `Your application for "${jobTitle}" moved from ${oldStatus} to ${newStatus}.`
+                        + (reason ? ` Note: ${reason}` : ''),
+                    application: application._id,
+                }], { session })
+            }
         })
+    } finally {
+        await session.endSession()
     }
 
     return res.status(200).json(application)

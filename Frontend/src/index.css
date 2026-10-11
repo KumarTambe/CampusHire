@@ -2,35 +2,33 @@
 
 /* ------------------------------------------------------------------
    CampusHire design tokens
-   Light content on slate/white, solid navy header & footer, one
-   confident indigo brand color carrying every button, link and badge.
+   Flat, light and editorial: warm off-white page, zinc neutrals,
+   ink-black primary actions and a single cobalt accent for links,
+   selection and progress. Hairline borders do the work shadows used to.
 ------------------------------------------------------------------- */
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
 
-  --color-navy-950: #06081c;
-  --color-navy-900: #0b0e27;
-  --color-navy-800: #11143a;
-  --color-navy-700: #181c4d;
+  --color-ink: #18181b;
+  --color-paper: #fafaf9;
 
-  --color-brand-50: #eef0ff;
-  --color-brand-100: #e0e2ff;
-  --color-brand-200: #c6c9ff;
-  --color-brand-300: #a8acfb;
-  --color-brand-400: #8a8bf8;
-  --color-brand-500: #6d6af5;
-  --color-brand-600: #5750e8;
-  --color-brand-700: #4740c9;
-  --color-brand-800: #3934a0;
-  --color-brand-900: #2c2980;
+  --color-brand-50: #eef3ff;
+  --color-brand-100: #dbe5ff;
+  --color-brand-200: #bccfff;
+  --color-brand-300: #8eadff;
+  --color-brand-400: #5b84fb;
+  --color-brand-500: #3461f0;
+  --color-brand-600: #2149d6;
+  --color-brand-700: #1b3bb0;
+  --color-brand-800: #1b338c;
+  --color-brand-900: #1b2e6f;
 
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @layer base {
   html {
-    scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color-scheme: light;
@@ -39,90 +37,64 @@
   body {
     margin: 0;
     min-height: 100svh;
-    background-color: #f6f7fb;
-    color: #1e293b;
+    background-color: var(--color-paper);
+    color: #27272a;
     font-family: var(--font-sans);
-    font-feature-settings: "cv11", "ss01";
   }
 
-  ::selection { background: rgba(87, 80, 232, 0.18); color: #1e1b4b; }
+  h1, h2, h3 { letter-spacing: -0.015em; }
 
-  ::-webkit-scrollbar { width: 10px; height: 10px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb {
-    background: rgba(30, 41, 59, 0.18);
-    border-radius: 99px;
-    border: 2px solid transparent;
-    background-clip: content-box;
-  }
-  ::-webkit-scrollbar-thumb:hover { background: rgba(30, 41, 59, 0.3); background-clip: content-box; }
+  ::selection { background: var(--color-brand-100); color: var(--color-ink); }
 
   :focus-visible {
     outline: 2px solid var(--color-brand-500);
     outline-offset: 2px;
-    border-radius: 6px;
+    border-radius: 4px;
   }
 
   input, select, textarea { font-family: inherit; }
-  input::placeholder, textarea::placeholder { color: #94a3b8; }
-  select option { background: #ffffff; color: #1e293b; }
+  input::placeholder, textarea::placeholder { color: #a1a1aa; }
+  select option { background: #ffffff; color: #27272a; }
 }
 
 @layer components {
-  /* The one card surface used everywhere: white, soft shadow, hairline border */
+  /* The one card surface used everywhere: white with a hairline border */
   .surface {
     background: #ffffff;
-    border: 1px solid #e6e8f0;
-    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 12px 28px -16px rgba(30, 27, 75, 0.14);
+    border: 1px solid #e4e4e7;
   }
 
   .surface-hover {
-    transition: border-color 220ms var(--ease-out-soft),
-                transform 220ms var(--ease-out-soft),
-                box-shadow 220ms var(--ease-out-soft);
+    transition: border-color 160ms ease, box-shadow 160ms ease;
   }
   .surface-hover:hover {
-    transform: translateY(-2px);
-    border-color: #cdd2f5;
-    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 20px 36px -18px rgba(30, 27, 75, 0.22);
+    border-color: #a1a1aa;
+    box-shadow: 0 1px 0 #e4e4e7;
   }
 
-  /* Dark navy → indigo diagonal wash used on the hero, CTA band and auth screens */
-  .navy-wash {
-    background: linear-gradient(135deg, #06081c 0%, #14173f 42%, #322d8c 78%, #5750e8 100%);
-  }
-
-  .hairline { background: #e6e8f0; height: 1px; }
+  .hairline { background: #e4e4e7; height: 1px; }
 }
 
 @layer utilities {
-  @keyframes rise {
-    from { opacity: 0; transform: translateY(14px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
   @keyframes fade { from { opacity: 0 } to { opacity: 1 } }
   @keyframes shimmer {
     from { background-position: -200% 0 }
     to   { background-position: 200% 0 }
   }
 
-  .animate-rise { animation: rise 520ms var(--ease-out-soft) both; }
-  .animate-fade { animation: fade 380ms var(--ease-out-soft) both; }
+  .animate-fade { animation: fade 200ms ease both; }
 
   .skeleton {
-    background: linear-gradient(90deg, #eef0f6 25%, #f8f9fc 37%, #eef0f6 63%);
+    background: linear-gradient(90deg, #f0f0f1 25%, #f8f8f8 37%, #f0f0f1 63%);
     background-size: 200% 100%;
     animation: shimmer 1.6s linear infinite;
   }
-
-  .stagger { animation-delay: calc(var(--i, 0) * 50ms); }
 
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
     }
   }
 }

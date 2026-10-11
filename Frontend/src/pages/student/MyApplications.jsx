@@ -92,19 +92,19 @@ export default function MyApplications() {
                 />
             ) : (
                 <div className="space-y-3">
-                    {visible.map((app, i) => {
+                    {visible.map((app) => {
                         const open = expanded === app._id
                         const canWithdraw = ['applied', 'shortlisted'].includes(app.status)
                         return (
-                            <Card key={app._id} className="animate-rise stagger overflow-hidden" style={{ '--i': i }}>
+                            <Card key={app._id} className="overflow-hidden">
                                 <div className="p-5">
                                     <div className="flex flex-wrap items-start justify-between gap-4">
                                         <div className="min-w-0">
                                             <Link to={`/jobs/${app.job?._id}`}
-                                                className="text-[15.5px] font-semibold text-slate-900 transition-colors hover:text-indigo-700">
+                                                className="text-[15.5px] font-semibold text-zinc-900 transition-colors hover:text-brand-700">
                                                 {app.job?.title || 'Role removed'}
                                             </Link>
-                                            <p className="mt-1 text-[12.5px] text-slate-500">
+                                            <p className="mt-1 text-[12.5px] text-zinc-500">
                                                 {app.job ? companyOf(app.job) : '—'} · applied {timeAgo(app.createdAt)}
                                             </p>
                                         </div>
@@ -113,13 +113,13 @@ export default function MyApplications() {
 
                                     <Pipeline status={app.status} className="mt-6" />
 
-                                    <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-[12px] text-slate-500">
+                                    <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-[12px] text-zinc-500">
                                         <span>Snapshot at apply time:</span>
-                                        <span className="tabular-nums text-slate-500">
+                                        <span className="tabular-nums text-zinc-500">
                                             CGPA {app.eligibilitySnapshot?.cgpa ?? '—'}
                                         </span>
-                                        <span className="text-slate-500">{app.eligibilitySnapshot?.branch || '—'}</span>
-                                        <span className="tabular-nums text-slate-500">
+                                        <span className="text-zinc-500">{app.eligibilitySnapshot?.branch || '—'}</span>
+                                        <span className="tabular-nums text-zinc-500">
                                             Batch {app.eligibilitySnapshot?.graduationYear ?? '—'}
                                         </span>
 
@@ -139,31 +139,31 @@ export default function MyApplications() {
                                 </div>
 
                                 {open && (
-                                    <div className="animate-fade border-t border-white/[0.07] bg-white/[0.015] p-5">
+                                    <div className="animate-fade border-t border-zinc-200 bg-zinc-50 p-5">
                                         <ol className="relative space-y-4 pl-5">
-                                            <span className="absolute left-[3px] top-2 bottom-2 w-px bg-white/10" />
+                                            <span className="absolute left-[3px] top-2 bottom-2 w-px bg-zinc-200" />
                                             <li className="relative">
                                                 <span className="absolute -left-5 top-1.5 size-[7px] rounded-full bg-sky-400 ring-4 ring-sky-400/12" />
-                                                <p className="text-[13px] text-slate-400">
+                                                <p className="text-[13px] text-zinc-400">
                                                     Application submitted
                                                 </p>
-                                                <p className="mt-0.5 text-[11.5px] text-slate-400">
+                                                <p className="mt-0.5 text-[11.5px] text-zinc-400">
                                                     {formatDateTime(app.createdAt)}
                                                 </p>
                                             </li>
                                             {(app.history || []).map(log => (
                                                 <li key={log._id} className="relative">
-                                                    <span className="absolute -left-5 top-1.5 size-[7px] rounded-full bg-brand-500 ring-4 ring-indigo-400/12" />
-                                                    <p className="text-[13px] text-slate-400">
+                                                    <span className="absolute -left-5 top-1.5 size-[7px] rounded-full bg-brand-500 ring-4 ring-brand-100" />
+                                                    <p className="text-[13px] text-zinc-400">
                                                         <span className="capitalize">{log.oldStatus}</span>
                                                         {' → '}
-                                                        <span className="font-medium capitalize text-slate-900">{log.newStatus}</span>
-                                                        <span className="text-slate-500"> by the {log.changedByRole}</span>
+                                                        <span className="font-medium capitalize text-zinc-900">{log.newStatus}</span>
+                                                        <span className="text-zinc-500"> by the {log.changedByRole}</span>
                                                     </p>
                                                     {log.reason && (
-                                                        <p className="mt-1 text-[12.5px] italic text-slate-500">“{log.reason}”</p>
+                                                        <p className="mt-1 text-[12.5px] italic text-zinc-500">“{log.reason}”</p>
                                                     )}
-                                                    <p className="mt-0.5 text-[11.5px] text-slate-400">
+                                                    <p className="mt-0.5 text-[11.5px] text-zinc-400">
                                                         {formatDateTime(log.createdAt)}
                                                     </p>
                                                 </li>

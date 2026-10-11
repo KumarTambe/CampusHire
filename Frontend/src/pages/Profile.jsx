@@ -81,14 +81,14 @@ function ProfileForm({ user }) {
             <div className="grid gap-5 lg:grid-cols-[320px_minmax(0,1fr)]">
                 {/* ------------------------------------------------- identity */}
                 <div className="space-y-5">
-                    <Card className="animate-rise p-6 text-center">
-                        <span className="mx-auto grid size-16 place-items-center rounded-2xl bg-brand-50 text-[19px] font-bold text-brand-700 ring-1 ring-inset ring-brand-100">
+                    <Card className="p-6 text-center">
+                        <span className="mx-auto grid size-16 place-items-center rounded-full border border-zinc-200 bg-zinc-100 text-[19px] font-semibold text-zinc-700">
                             {initials(user)}
                         </span>
-                        <h2 className="mt-4 text-[17px] font-semibold text-slate-900">
+                        <h2 className="mt-4 text-[17px] font-semibold text-zinc-900">
                             {user.firstName} {user.lastName}
                         </h2>
-                        <p className="mt-1 inline-flex items-center gap-1.5 text-[12.5px] text-slate-500">
+                        <p className="mt-1 inline-flex items-center gap-1.5 text-[12.5px] text-zinc-500">
                             <IconMail className="size-3.5" /> {user.email}
                         </p>
                         <div className="mt-4 flex flex-wrap justify-center gap-2">
@@ -98,26 +98,26 @@ function ProfileForm({ user }) {
                                 ? <Badge tone="emerald" dot>Active</Badge>
                                 : <Badge tone="rose" dot>Deactivated</Badge>}
                         </div>
-                        <p className="mt-5 text-[11.5px] text-slate-400">
+                        <p className="mt-5 text-[11.5px] text-zinc-400">
                             Member since {formatDate(user.createdAt)}
                         </p>
                     </Card>
 
                     {!(user.role === 'admin') && (
-                        <Card className="animate-rise p-5" style={{ animationDelay: '60ms' }}>
+                        <Card className="p-5">
                             <div className="flex items-baseline justify-between">
-                                <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">
+                                <p className="text-[14px] font-semibold text-zinc-900">
                                     Profile strength
                                 </p>
-                                <p className="text-[13px] font-semibold tabular-nums text-slate-900">{percent}%</p>
+                                <p className="text-[13px] font-semibold tabular-nums text-zinc-900">{percent}%</p>
                             </div>
-                            <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-white/8">
+                            <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-zinc-200">
                                 <div
                                     className="h-full rounded-full bg-brand-600 transition-[width] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
                                     style={{ width: `${percent}%` }}
                                 />
                             </div>
-                            <p className="mt-3 text-[12px] leading-relaxed text-slate-500">
+                            <p className="mt-3 text-[12px] leading-relaxed text-zinc-500">
                                 {percent === 100
                                     ? 'Everything we need is here.'
                                     : isStudent
@@ -128,9 +128,8 @@ function ProfileForm({ user }) {
                     )}
 
                     {isRecruiter && user.verificationStatus !== 'verified' && (
-                        <Card className={`animate-rise p-5 ${user.verificationStatus === 'rejected'
-                            ? 'border-rose-200 bg-rose-50' : 'border-amber-200 bg-amber-50'}`}
-                            style={{ animationDelay: '100ms' }}>
+                        <Card className={`p-5 ${user.verificationStatus === 'rejected'
+                            ? 'border-rose-200 bg-rose-50' : 'border-amber-200 bg-amber-50'}`}>
                             <p className={`text-[13px] leading-relaxed ${user.verificationStatus === 'rejected'
                                 ? 'text-rose-700' : 'text-amber-700'}`}>
                                 {user.verificationStatus === 'rejected'
@@ -142,10 +141,10 @@ function ProfileForm({ user }) {
                 </div>
 
                 {/* ----------------------------------------------------- form */}
-                <Card className="animate-rise p-6 sm:p-7" style={{ animationDelay: '80ms' }}>
+                <Card className="p-6 sm:p-7">
                     <form onSubmit={onSubmit} className="space-y-5">
                         <div>
-                            <h2 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">
+                            <h2 className="text-[14px] font-semibold text-zinc-900">
                                 Basic details
                             </h2>
                             <div className="mt-4 grid gap-4 sm:grid-cols-2">
@@ -165,7 +164,7 @@ function ProfileForm({ user }) {
                             <>
                                 <div className="hairline" />
                                 <div>
-                                    <h2 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">
+                                    <h2 className="text-[14px] font-semibold text-zinc-900">
                                         Academics
                                     </h2>
                                     <div className="mt-4 grid gap-4 sm:grid-cols-2">
@@ -193,7 +192,7 @@ function ProfileForm({ user }) {
 
                                 <div className="hairline" />
                                 <div>
-                                    <h2 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">
+                                    <h2 className="text-[14px] font-semibold text-zinc-900">
                                         Skills & resume
                                     </h2>
                                     <Field label="Skills" className="mt-4" hint="Comma separated. Matching skills are highlighted on job pages.">
@@ -203,7 +202,7 @@ function ProfileForm({ user }) {
                                     {form.skills.trim() && (
                                         <div className="mt-3 flex flex-wrap gap-1.5">
                                             {form.skills.split(',').map(s => s.trim()).filter(Boolean).map(s => (
-                                                <span key={s} className="rounded-md bg-indigo-50 px-2 py-1 text-[11px] text-indigo-600 ring-1 ring-inset ring-indigo-200">
+                                                <span key={s} className="rounded border border-zinc-200 px-1.5 py-0.5 text-[12px] text-zinc-700">
                                                     {s}
                                                 </span>
                                             ))}
@@ -221,7 +220,7 @@ function ProfileForm({ user }) {
                             <>
                                 <div className="hairline" />
                                 <div>
-                                    <h2 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">
+                                    <h2 className="text-[14px] font-semibold text-zinc-900">
                                         Company
                                     </h2>
                                     <Field label="Company name" className="mt-4">
@@ -237,7 +236,7 @@ function ProfileForm({ user }) {
                                     </Field>
                                     {form.companyWebsite && (
                                         <a href={form.companyWebsite} target="_blank" rel="noreferrer noopener"
-                                            className="mt-3 inline-flex items-center gap-1.5 text-[12.5px] text-indigo-600 underline-offset-4 hover:underline">
+                                            className="mt-3 inline-flex items-center gap-1.5 text-[12.5px] text-brand-600 underline-offset-4 hover:underline">
                                             <IconLink className="size-3.5" /> Preview link
                                         </a>
                                     )}
@@ -246,8 +245,8 @@ function ProfileForm({ user }) {
                         )}
 
                         {user.role === 'admin' && (
-                            <p className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3.5 text-[13px] leading-relaxed text-slate-500">
-                                <IconUser className="mr-2 inline size-4 text-slate-500" />
+                            <p className="rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3.5 text-[13px] leading-relaxed text-zinc-500">
+                                <IconUser className="mr-2 inline size-4 text-zinc-500" />
                                 Admin accounts carry no additional profile fields.
                             </p>
                         )}

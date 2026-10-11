@@ -89,12 +89,12 @@ export default function Register() {
                                 'rounded-xl border p-3.5 text-left transition-all duration-200',
                                 role === value
                                     ? 'border-brand-400 bg-brand-50'
-                                    : 'border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50'
+                                    : 'border-zinc-200 bg-white hover:border-zinc-300 hover:bg-zinc-50'
                             )}
                         >
-                            <Icon className={cx('size-5', role === value ? 'text-brand-600' : 'text-slate-400')} />
-                            <p className="mt-2.5 text-[13.5px] font-semibold text-slate-900">{label}</p>
-                            <p className="mt-0.5 text-[11.5px] text-slate-500">{blurb}</p>
+                            <Icon className={cx('size-5', role === value ? 'text-brand-600' : 'text-zinc-400')} />
+                            <p className="mt-2.5 text-[13.5px] font-semibold text-zinc-900">{label}</p>
+                            <p className="mt-0.5 text-[11.5px] text-zinc-500">{blurb}</p>
                         </button>
                     ))}
                 </div>
@@ -123,7 +123,7 @@ export default function Register() {
 
                 {role === 'student' ? (
                     <div className="animate-fade space-y-4">
-                        <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-slate-400">
+                        <p className="text-[13px] font-medium text-zinc-500">
                             Academic profile
                         </p>
                         <div className="grid grid-cols-2 gap-3">
@@ -155,7 +155,7 @@ export default function Register() {
                     </div>
                 ) : (
                     <div className="animate-fade space-y-4">
-                        <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-slate-400">
+                        <p className="text-[13px] font-medium text-zinc-500">
                             Company details
                         </p>
                         <Field label="Company name">

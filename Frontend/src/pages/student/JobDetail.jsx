@@ -19,7 +19,7 @@ const Criterion = ({ met, label }) => (
             : 'bg-rose-50 text-rose-400 ring-rose-200'}`}>
             {met ? <IconCheck className="size-2.5" /> : <IconX className="size-2.5" />}
         </span>
-        <span className={met ? 'text-slate-400' : 'text-slate-500'}>{label}</span>
+        <span className={met ? 'text-zinc-400' : 'text-zinc-500'}>{label}</span>
     </li>
 )
 
@@ -113,17 +113,17 @@ function JobDetailView({ id }) {
             <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_340px]">
                 {/* ------------------------------------------------------ main */}
                 <div className="space-y-5">
-                    <Card className="animate-rise p-6 sm:p-7">
+                    <Card className="p-6 sm:p-7">
                         <div className="flex flex-wrap items-start justify-between gap-4">
                             <div className="flex min-w-0 items-start gap-4">
-                                <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-brand-50 text-brand-600 ring-1 ring-inset ring-brand-100">
+                                <span className="grid size-12 shrink-0 place-items-center rounded-md border border-zinc-200 bg-zinc-50 text-zinc-700">
                                     <IconBuilding className="size-5" />
                                 </span>
                                 <div className="min-w-0">
-                                    <h1 className="text-[24px] font-semibold leading-tight tracking-[-0.025em] text-slate-900 sm:text-[28px]">
+                                    <h1 className="text-[24px] font-semibold leading-tight tracking-[-0.025em] text-zinc-900 sm:text-[28px]">
                                         {job.title}
                                     </h1>
-                                    <p className="mt-1.5 text-[14px] text-slate-500">{companyOf(job)}</p>
+                                    <p className="mt-1.5 text-[14px] text-zinc-500">{companyOf(job)}</p>
                                 </div>
                             </div>
                             {isStudent && (
@@ -136,10 +136,10 @@ function JobDetailView({ id }) {
                             {!isStudent && job.status && <StatusBadge status={job.status} />}
                         </div>
 
-                        <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-[12.5px] text-slate-500">
+                        <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-[12.5px] text-zinc-500">
                             {job.location && <span className="inline-flex items-center gap-1.5"><IconPin className="size-3.5" />{job.location}</span>}
                             {job.jobType && <span className="capitalize">{job.jobType.replace('-', ' ')}</span>}
-                            {job.salary && <span className="text-slate-500">{job.salary}</span>}
+                            {job.salary && <span className="text-zinc-500">{job.salary}</span>}
                             {deadline && (
                                 <span className={`inline-flex items-center gap-1.5 ${deadline.urgent ? 'text-amber-600' : ''}`}>
                                     <IconClock className="size-3.5" />
@@ -150,32 +150,32 @@ function JobDetailView({ id }) {
 
                         <div className="hairline my-6" />
 
-                        <h2 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">
+                        <h2 className="text-[14px] font-semibold text-zinc-900">
                             About the role
                         </h2>
-                        <p className="mt-3 whitespace-pre-line text-[14.5px] leading-[1.75] text-slate-400">
+                        <p className="mt-3 whitespace-pre-line text-[14.5px] leading-[1.75] text-zinc-400">
                             {job.description}
                         </p>
 
                         {job.requiredSkills?.length > 0 && (
                             <>
-                                <h2 className="mt-8 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">
+                                <h2 className="mt-8 text-[14px] font-semibold text-zinc-900">
                                     Skills they are looking for
                                 </h2>
                                 <div className="mt-3 flex flex-wrap gap-2">
                                     {job.requiredSkills.map(skill => {
                                         const has = user?.skills?.some(s => s.toLowerCase() === skill.toLowerCase())
                                         return (
-                                            <span key={skill} className={`rounded-lg px-2.5 py-1.5 text-[12px] ring-1 ring-inset ${has
-                                                ? 'bg-indigo-50 text-indigo-700 ring-indigo-200'
-                                                : 'bg-slate-50 text-slate-500 ring-slate-200'}`}>
+                                            <span key={skill} className={`rounded-md px-2 py-1 text-[12px] ring-1 ring-inset ${has
+                                                ? 'bg-brand-50 text-brand-700 ring-brand-200'
+                                                : 'bg-zinc-50 text-zinc-500 ring-zinc-200'}`}>
                                                 {skill}
                                             </span>
                                         )
                                     })}
                                 </div>
                                 {isStudent && (
-                                    <p className="mt-2.5 text-[11.5px] text-slate-400">
+                                    <p className="mt-2.5 text-[11.5px] text-zinc-400">
                                         Highlighted skills are ones already on your profile.
                                     </p>
                                 )}
@@ -184,16 +184,16 @@ function JobDetailView({ id }) {
                     </Card>
 
                     {job.postedBy?.companyDescription && (
-                        <Card className="animate-rise p-6" style={{ animationDelay: '60ms' }}>
-                            <h2 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">
+                        <Card className="p-6">
+                            <h2 className="text-[14px] font-semibold text-zinc-900">
                                 About {companyOf(job)}
                             </h2>
-                            <p className="mt-3 text-[14px] leading-relaxed text-slate-500">
+                            <p className="mt-3 text-[14px] leading-relaxed text-zinc-500">
                                 {job.postedBy.companyDescription}
                             </p>
                             {job.postedBy.companyWebsite && (
                                 <a href={job.postedBy.companyWebsite} target="_blank" rel="noreferrer noopener"
-                                    className="mt-4 inline-flex items-center gap-1.5 text-[13px] text-indigo-600 underline-offset-4 hover:underline">
+                                    className="mt-4 inline-flex items-center gap-1.5 text-[13px] text-brand-600 underline-offset-4 hover:underline">
                                     <IconLink className="size-3.5" /> {job.postedBy.companyWebsite}
                                 </a>
                             )}
@@ -203,13 +203,13 @@ function JobDetailView({ id }) {
 
                 {/* --------------------------------------------------- sidebar */}
                 <div className="space-y-5 lg:sticky lg:top-24 lg:self-start">
-                    <Card className="animate-rise p-6" style={{ animationDelay: '80ms' }}>
-                        <h2 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">
+                    <Card className="p-6">
+                        <h2 className="text-[14px] font-semibold text-zinc-900">
                             Eligibility
                         </h2>
 
                         {criteria.length === 0 ? (
-                            <p className="mt-3.5 text-[13.5px] leading-relaxed text-slate-500">
+                            <p className="mt-3.5 text-[13.5px] leading-relaxed text-zinc-500">
                                 This role is open to every student — no CGPA, branch or batch restrictions.
                             </p>
                         ) : (
@@ -227,12 +227,12 @@ function JobDetailView({ id }) {
                                             <IconLock className="size-4" />
                                             {job.alreadyApplied ? 'Already applied' : 'Cannot apply'}
                                         </Button>
-                                        <p className="mt-3 text-center text-[12.5px] leading-relaxed text-slate-500">
+                                        <p className="mt-3 text-center text-[12.5px] leading-relaxed text-zinc-500">
                                             {blockedReason}
                                         </p>
                                         {job.alreadyApplied && (
                                             <Link to="/my-applications"
-                                                className="mt-3 block text-center text-[13px] text-indigo-600 underline-offset-4 hover:underline">
+                                                className="mt-3 block text-center text-[13px] text-brand-600 underline-offset-4 hover:underline">
                                                 Track this application →
                                             </Link>
                                         )}
@@ -250,7 +250,7 @@ function JobDetailView({ id }) {
                                             onClick={() => setConfirm(true)}>
                                             <IconSend className="size-4" /> Apply now
                                         </Button>
-                                        <p className="mt-3 text-center text-[12px] text-slate-500">
+                                        <p className="mt-3 text-center text-[12px] text-zinc-500">
                                             Your CGPA, branch and batch are recorded with the application.
                                         </p>
                                     </>
@@ -259,8 +259,8 @@ function JobDetailView({ id }) {
                         )}
                     </Card>
 
-                    <Card className="animate-rise p-6" style={{ animationDelay: '120ms' }}>
-                        <h2 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">
+                    <Card className="p-6">
+                        <h2 className="text-[14px] font-semibold text-zinc-900">
                             At a glance
                         </h2>
                         <dl className="mt-4 space-y-3 text-[13px]">
@@ -271,8 +271,8 @@ function JobDetailView({ id }) {
                                 ['Compensation', job.salary || '—', false],
                             ].map(([k, v, cap]) => (
                                 <div key={k} className="flex items-baseline justify-between gap-4">
-                                    <dt className="text-slate-500">{k}</dt>
-                                    <dd className={cx('text-right text-slate-400', cap && 'capitalize')}>{v}</dd>
+                                    <dt className="text-zinc-500">{k}</dt>
+                                    <dd className={cx('text-right text-zinc-400', cap && 'capitalize')}>{v}</dd>
                                 </div>
                             ))}
                         </dl>
@@ -297,9 +297,9 @@ function JobDetailView({ id }) {
                 <div className="grid grid-cols-3 gap-3">
                     {[['CGPA', user?.cgpa ?? '—'], ['Branch', user?.branch || '—'], ['Batch', user?.graduationYear || '—']]
                         .map(([k, v]) => (
-                            <div key={k} className="rounded-xl border border-slate-200 bg-slate-50 p-3.5 text-center">
-                                <p className="text-[10.5px] uppercase tracking-[0.14em] text-slate-500">{k}</p>
-                                <p className="mt-1.5 text-[16px] font-semibold text-slate-900">{v}</p>
+                            <div key={k} className="rounded-xl border border-zinc-200 bg-zinc-50 p-3.5 text-center">
+                                <p className="text-[11.5px] text-zinc-500">{k}</p>
+                                <p className="mt-1.5 text-[16px] font-semibold text-zinc-900">{v}</p>
                             </div>
                         ))}
                 </div>

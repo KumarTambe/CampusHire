@@ -3,7 +3,7 @@ import toast from 'react-hot-toast'
 import api, { errorMessage } from '../../lib/api'
 import { useAuth } from '../../context/AuthContext'
 import JobCard from '../../components/JobCard'
-import { Card, EmptyState, Input, PageHeader, Skeleton, Tabs, Badge } from '../../components/ui'
+import { Card, EmptyState, Input, PageHeader, Skeleton, Tabs } from '../../components/ui'
 import { IconCompass, IconSearch } from '../../components/icons'
 import { Link } from 'react-router-dom'
 
@@ -62,7 +62,7 @@ export default function StudentDashboard() {
                 subtitle="Every posting below is checked against your CGPA, branch and graduation year before it reaches you."
                 actions={
                     <div className="relative w-full sm:w-72">
-                        <IconSearch className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-slate-500" />
+                        <IconSearch className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-zinc-500" />
                         <Input className="pl-9" placeholder="Search roles, skills, companies"
                             value={query} onChange={e => setQuery(e.target.value)} />
                     </div>
@@ -70,7 +70,7 @@ export default function StudentDashboard() {
             />
 
             {missing.length > 0 && (
-                <Card className="animate-rise mb-6 flex flex-col gap-3 border-amber-200 bg-amber-50 p-4 sm:flex-row sm:items-center sm:justify-between">
+                <Card className="mb-6 flex flex-col gap-3 border-amber-200 bg-amber-50 p-4 sm:flex-row sm:items-center sm:justify-between">
                     <p className="text-[13.5px] leading-relaxed text-amber-700">
                         Your profile is missing <strong className="font-semibold">{missing.join(', ')}</strong>.
                         Jobs that filter on those fields will show as ineligible until you add them.
@@ -82,9 +82,9 @@ export default function StudentDashboard() {
                 </Card>
             )}
 
-            <div className="mb-6 flex flex-wrap items-center gap-3">
-                <Tabs tabs={FILTERS.map(f => ({ ...f, count: counts[f.value] }))} value={filter} onChange={setFilter} />
-                {!loading && <Badge tone="neutral">{visible.length} shown</Badge>}
+            <div className="mb-6 flex items-end gap-4 border-b border-zinc-200">
+                <Tabs className="flex-1 border-b-0" tabs={FILTERS.map(f => ({ ...f, count: counts[f.value] }))} value={filter} onChange={setFilter} />
+                {!loading && <p className="shrink-0 pb-2.5 text-[12.5px] text-zinc-500">{visible.length} shown</p>}
             </div>
 
             {loading ? (
@@ -101,7 +101,7 @@ export default function StudentDashboard() {
                 />
             ) : (
                 <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-                    {visible.map((job, i) => <JobCard key={job._id} job={job} index={i} />)}
+                    {visible.map(job => <JobCard key={job._id} job={job} />)}
                 </div>
             )}
         </>

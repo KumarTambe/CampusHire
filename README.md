@@ -147,6 +147,22 @@ import it than click through the form.
 
 ---
 
+## Data consistency
+
+- **Status changes** (recruiter/admin updates and student withdrawals) save the new
+  status, its audit log entry and the notification in one MongoDB transaction:
+  either all three are written or none are.
+- **Applying** creates the application and the recruiter's notification in one
+  transaction.
+- **Duplicate applications** are blocked by a unique index on `(student, job)`. A second
+  application to the same job returns `409`.
+
+Transactions require a replica set. MongoDB Atlas works out of the box; a plain
+standalone local `mongod` will throw. For local development, use Atlas or start
+`mongod --replSet rs0` and run `rs.initiate()` once.
+
+---
+
 ## Notes on the design
 
 Dark slate ground with a fixed two-bloom ambient gradient and a masked hairline

@@ -5,28 +5,28 @@ export const cx = (...parts) => parts.filter(Boolean).join(' ')
 /* ------------------------------------------------------------------ Button */
 
 const VARIANTS = {
-    // solid indigo — the one brand color, carries every primary action
+    // ink-black carries primary actions; cobalt is kept for links and selection
     primary:
-        'bg-brand-600 text-white font-semibold shadow-sm hover:bg-brand-700 active:bg-brand-700',
+        'bg-ink text-white font-medium hover:bg-zinc-700 active:bg-zinc-800',
     accent:
-        'bg-brand-600 text-white font-medium shadow-sm hover:bg-brand-700 active:bg-brand-700',
+        'bg-ink text-white font-medium hover:bg-zinc-700 active:bg-zinc-800',
     ghost:
-        'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 hover:border-slate-300',
+        'bg-white text-zinc-800 font-medium border border-zinc-300 hover:bg-zinc-50 hover:border-zinc-400',
     outline:
-        'bg-transparent text-slate-600 border border-slate-200 hover:bg-slate-50 hover:text-slate-900',
+        'bg-transparent text-zinc-700 font-medium border border-zinc-300 hover:bg-zinc-100 hover:text-zinc-900',
     danger:
-        'bg-rose-50 text-rose-600 border border-rose-200 hover:bg-rose-100',
+        'bg-white text-rose-700 font-medium border border-rose-200 hover:bg-rose-50 hover:border-rose-300',
     success:
-        'bg-emerald-50 text-emerald-600 border border-emerald-200 hover:bg-emerald-100',
+        'bg-white text-emerald-700 font-medium border border-emerald-200 hover:bg-emerald-50 hover:border-emerald-300',
     subtle:
-        'bg-transparent text-slate-500 hover:text-slate-900 hover:bg-slate-100',
+        'bg-transparent text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100',
 }
 
 const SIZES = {
-    xs: 'h-7 px-2.5 text-xs rounded-lg gap-1',
-    sm: 'h-9 px-3.5 text-[13px] rounded-lg gap-1.5',
-    md: 'h-11 px-5 text-sm rounded-xl gap-2',
-    lg: 'h-12 px-6 text-[15px] rounded-xl gap-2',
+    xs: 'h-7 px-2.5 text-xs rounded-md gap-1',
+    sm: 'h-8 px-3 text-[13px] rounded-md gap-1.5',
+    md: 'h-10 px-4 text-sm rounded-lg gap-2',
+    lg: 'h-11 px-5 text-[15px] rounded-lg gap-2',
 }
 
 export function Button({
@@ -37,8 +37,8 @@ export function Button({
         <Tag
             className={cx(
                 'inline-flex items-center justify-center whitespace-nowrap select-none',
-                'transition-all duration-200 ease-[cubic-bezier(0.22,1,0.36,1)]',
-                'disabled:opacity-45 disabled:pointer-events-none',
+                'transition-colors duration-150',
+                'disabled:opacity-40 disabled:pointer-events-none',
                 VARIANTS[variant], SIZES[size], className
             )}
             disabled={disabled || loading}
@@ -63,7 +63,7 @@ export function Spinner({ className = 'size-4' }) {
 
 export function Card({ className, hover = false, children, ...props }) {
     return (
-        <div className={cx('surface rounded-2xl', hover && 'surface-hover', className)} {...props}>
+        <div className={cx('surface rounded-lg', hover && 'surface-hover', className)} {...props}>
             {children}
         </div>
     )
@@ -72,21 +72,21 @@ export function Card({ className, hover = false, children, ...props }) {
 /* ------------------------------------------------------------------- Badge */
 
 const TONES = {
-    neutral: 'bg-slate-100 text-slate-600 ring-slate-200',
-    indigo: 'bg-brand-50 text-brand-700 ring-brand-100',
-    violet: 'bg-violet-50 text-violet-700 ring-violet-100',
-    amber: 'bg-amber-50 text-amber-700 ring-amber-100',
-    emerald: 'bg-emerald-50 text-emerald-700 ring-emerald-100',
-    rose: 'bg-rose-50 text-rose-700 ring-rose-100',
-    sky: 'bg-sky-50 text-sky-700 ring-sky-100',
-    slate: 'bg-slate-100 text-slate-500 ring-slate-200',
+    neutral: 'bg-zinc-100 text-zinc-700',
+    indigo: 'bg-brand-50 text-brand-700',
+    violet: 'bg-amber-50 text-amber-800',
+    amber: 'bg-amber-50 text-amber-800',
+    emerald: 'bg-emerald-50 text-emerald-700',
+    rose: 'bg-rose-50 text-rose-700',
+    sky: 'bg-sky-50 text-sky-700',
+    slate: 'bg-zinc-100 text-zinc-500',
 }
 
 export function Badge({ tone = 'neutral', dot = false, className, children }) {
     return (
         <span className={cx(
-            'inline-flex items-center gap-1.5 rounded-full px-2.5 py-1',
-            'text-[11px] font-semibold tracking-wide ring-1 ring-inset',
+            'inline-flex items-center gap-1.5 rounded-md px-2 py-0.5',
+            'text-[12px] font-medium',
             TONES[tone] || TONES.neutral, className
         )}>
             {dot && <span className="size-1.5 rounded-full bg-current" />}
@@ -97,9 +97,9 @@ export function Badge({ tone = 'neutral', dot = false, className, children }) {
 
 /** Shared colour language for every status shown anywhere in the product. */
 export const STATUS_TONE = {
-    applied: 'sky',
-    shortlisted: 'indigo',
-    interview: 'violet',
+    applied: 'neutral',
+    shortlisted: 'sky',
+    interview: 'indigo',
     selected: 'emerald',
     rejected: 'rose',
     withdrawn: 'slate',
@@ -119,38 +119,38 @@ export const StatusBadge = ({ status, className }) => (
 /* ------------------------------------------------------------- Form fields */
 
 const fieldBase =
-    'w-full rounded-xl bg-white border border-slate-200 px-3.5 text-sm text-slate-900 ' +
-    'transition-all duration-200 placeholder:text-slate-400 ' +
-    'hover:border-slate-300 focus:border-brand-500 ' +
-    'focus:ring-4 focus:ring-brand-500/10 focus:outline-none disabled:bg-slate-50 disabled:text-slate-400'
+    'w-full rounded-lg bg-white border border-zinc-300 px-3 text-sm text-zinc-900 ' +
+    'transition-colors duration-150 placeholder:text-zinc-400 ' +
+    'hover:border-zinc-400 focus:border-brand-600 ' +
+    'focus:ring-3 focus:ring-brand-600/15 focus:outline-none disabled:bg-zinc-50 disabled:text-zinc-400'
 
 export function Field({ label, hint, error, required, children, className }) {
     return (
         <label className={cx('block', className)}>
             {label && (
-                <span className="mb-1.5 flex items-center gap-1 text-[12.5px] font-semibold text-slate-700">
+                <span className="mb-1.5 flex items-center gap-1 text-[13px] font-medium text-zinc-800">
                     {label}
-                    {required && <span className="text-brand-600">*</span>}
+                    {required && <span className="text-zinc-400">*</span>}
                 </span>
             )}
             {children}
-            {hint && !error && <span className="mt-1.5 block text-[11.5px] text-slate-500">{hint}</span>}
-            {error && <span className="mt-1.5 block text-[11.5px] text-rose-600">{error}</span>}
+            {hint && !error && <span className="mt-1.5 block text-[12px] text-zinc-500">{hint}</span>}
+            {error && <span className="mt-1.5 block text-[12px] text-rose-600">{error}</span>}
         </label>
     )
 }
 
 export const Input = ({ className, ...props }) => (
-    <input className={cx(fieldBase, 'h-11', className)} {...props} />
+    <input className={cx(fieldBase, 'h-10', className)} {...props} />
 )
 
 export const Textarea = ({ className, rows = 5, ...props }) => (
-    <textarea rows={rows} className={cx(fieldBase, 'py-3 leading-relaxed resize-y', className)} {...props} />
+    <textarea rows={rows} className={cx(fieldBase, 'py-2.5 leading-relaxed resize-y', className)} {...props} />
 )
 
 export const Select = ({ className, children, ...props }) => (
-    <select className={cx(fieldBase, 'h-11 appearance-none cursor-pointer pr-9',
-        'bg-[url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 16 16\' fill=\'%2394a3b8\'%3E%3Cpath d=\'M4.5 6.5 8 10l3.5-3.5\' stroke=\'%2394a3b8\' stroke-width=\'1.6\' fill=\'none\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E")]',
+    <select className={cx(fieldBase, 'h-10 appearance-none cursor-pointer pr-9',
+        'bg-[url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 16 16\' fill=\'%2371717a\'%3E%3Cpath d=\'M4.5 6.5 8 10l3.5-3.5\' stroke=\'%2371717a\' stroke-width=\'1.6\' fill=\'none\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E")]',
         'bg-[length:16px] bg-[right_0.75rem_center] bg-no-repeat', className)} {...props}>
         {children}
     </select>
@@ -160,48 +160,40 @@ export const Select = ({ className, children, ...props }) => (
 
 export function PageHeader({ eyebrow, title, subtitle, actions, className }) {
     return (
-        <div className={cx('mb-8 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between', className)}>
-            <div className="animate-rise min-w-0">
-                {eyebrow && (
-                    <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.16em] text-brand-600">
-                        {eyebrow}
-                    </p>
-                )}
-                <h1 className="text-[26px] sm:text-[32px] font-extrabold tracking-tight text-slate-900">
+        <div className={cx('mb-8 flex flex-col gap-5 border-b border-zinc-200 pb-6 sm:flex-row sm:items-end sm:justify-between', className)}>
+            <div className="min-w-0">
+                {eyebrow && <p className="mb-1.5 text-[13px] text-zinc-500">{eyebrow}</p>}
+                <h1 className="text-[26px] font-semibold tracking-tight text-zinc-900 sm:text-[30px]">
                     {title}
                 </h1>
-                {subtitle && <p className="mt-2 max-w-2xl text-[14.5px] leading-relaxed text-slate-500">{subtitle}</p>}
+                {subtitle && <p className="mt-2 max-w-2xl text-[14.5px] leading-relaxed text-zinc-600">{subtitle}</p>}
             </div>
-            {actions && <div className="flex shrink-0 flex-wrap items-center gap-2.5">{actions}</div>}
+            {actions && <div className="flex shrink-0 flex-wrap items-center gap-2">{actions}</div>}
         </div>
     )
 }
 
 export function EmptyState({ icon, title, description, action, className }) {
     return (
-        <Card className={cx('flex flex-col items-center px-6 py-16 text-center animate-fade', className)}>
-            {icon && (
-                <div className="mb-5 grid size-14 place-items-center rounded-2xl bg-brand-50 text-brand-600 ring-1 ring-inset ring-brand-100">
-                    {icon}
-                </div>
-            )}
-            <h3 className="text-[15px] font-bold text-slate-800">{title}</h3>
-            {description && <p className="mt-2 max-w-sm text-[13.5px] leading-relaxed text-slate-500">{description}</p>}
+        <div className={cx('flex flex-col items-center rounded-lg border border-dashed border-zinc-300 px-6 py-14 text-center', className)}>
+            {icon && <div className="mb-4 text-zinc-400">{icon}</div>}
+            <h3 className="text-[15px] font-semibold text-zinc-900">{title}</h3>
+            {description && <p className="mt-1.5 max-w-sm text-[13.5px] leading-relaxed text-zinc-500">{description}</p>}
             {action && <div className="mt-6">{action}</div>}
-        </Card>
+        </div>
     )
 }
 
 export function Skeleton({ className }) {
-    return <div className={cx('skeleton rounded-xl', className)} />
+    return <div className={cx('skeleton rounded-lg', className)} />
 }
 
 /** Full-height loading state used while a page's first fetch is in flight. */
 export function PageLoader({ label = 'Loading' }) {
     return (
-        <div className="flex min-h-[55vh] flex-col items-center justify-center gap-4 animate-fade">
-            <Spinner className="size-7 text-brand-600" />
-            <p className="text-[13px] tracking-wide text-slate-500">{label}…</p>
+        <div className="flex min-h-[55vh] flex-col items-center justify-center gap-3 animate-fade">
+            <Spinner className="size-6 text-zinc-400" />
+            <p className="text-[13px] text-zinc-500">{label}…</p>
         </div>
     )
 }
@@ -225,19 +217,19 @@ export function Modal({ open, onClose, title, description, children, footer }) {
     return (
         <div className="fixed inset-0 z-50 flex items-end justify-center p-4 sm:items-center">
             <div
-                className="absolute inset-0 bg-slate-900/50 backdrop-blur-sm animate-fade"
+                className="absolute inset-0 bg-zinc-900/40 animate-fade"
                 onClick={onClose}
                 aria-hidden="true"
             />
             <div
                 role="dialog"
                 aria-modal="true"
-                className="surface animate-rise relative w-full max-w-lg rounded-2xl p-6 sm:p-7"
+                className="surface animate-fade relative w-full max-w-lg rounded-lg p-6 shadow-xl"
             >
-                {title && <h2 className="text-lg font-bold tracking-tight text-slate-900">{title}</h2>}
-                {description && <p className="mt-1.5 text-[13.5px] leading-relaxed text-slate-500">{description}</p>}
+                {title && <h2 className="text-[17px] font-semibold text-zinc-900">{title}</h2>}
+                {description && <p className="mt-1.5 text-[13.5px] leading-relaxed text-zinc-500">{description}</p>}
                 {children && <div className="mt-5">{children}</div>}
-                {footer && <div className="mt-7 flex flex-col-reverse gap-2.5 sm:flex-row sm:justify-end">{footer}</div>}
+                {footer && <div className="mt-6 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">{footer}</div>}
             </div>
         </div>
     )
@@ -245,25 +237,18 @@ export function Modal({ open, onClose, title, description, children, footer }) {
 
 /* -------------------------------------------------------------------- Misc */
 
-export function Stat({ label, value, hint, tone = 'indigo', icon }) {
-    const chip = {
-        indigo: 'bg-brand-50 text-brand-600', violet: 'bg-violet-50 text-violet-600',
-        amber: 'bg-amber-50 text-amber-600', emerald: 'bg-emerald-50 text-emerald-600',
-        rose: 'bg-rose-50 text-rose-600', sky: 'bg-sky-50 text-sky-600',
-    }[tone]
-
+/** Number-first stat tile; stats stay neutral so status colours keep their meaning. */
+export function Stat({ label, value, hint, icon }) {
     return (
-        <Card hover className="p-5">
-            <div className="flex items-start justify-between gap-3">
-                <div className="min-w-0">
-                    <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-slate-500">{label}</p>
-                    <p className="mt-2 text-[30px] font-extrabold leading-none tracking-tight text-slate-900 tabular-nums">
-                        {value}
-                    </p>
-                    {hint && <p className="mt-2 text-[12px] text-slate-500">{hint}</p>}
-                </div>
-                {icon && <div className={cx('shrink-0 grid size-10 place-items-center rounded-xl', chip)}>{icon}</div>}
+        <Card className="p-5">
+            <div className="flex items-center justify-between gap-3 text-zinc-500">
+                <p className="text-[13px]">{label}</p>
+                {icon && <span className="shrink-0 [&>svg]:!size-4">{icon}</span>}
             </div>
+            <p className="mt-3 text-[28px] font-semibold leading-none tracking-tight text-zinc-900 tabular-nums">
+                {value}
+            </p>
+            {hint && <p className="mt-2 text-[12.5px] text-zinc-500">{hint}</p>}
         </Card>
     )
 }
@@ -272,7 +257,7 @@ export const Divider = ({ className }) => <div className={cx('hairline my-6', cl
 
 export function Tabs({ tabs, value, onChange, className }) {
     return (
-        <div className={cx('flex min-w-0 max-w-full gap-1 overflow-x-auto rounded-xl bg-slate-100 p-1',
+        <div className={cx('flex min-w-0 max-w-full gap-5 overflow-x-auto border-b border-zinc-200',
             '[scrollbar-width:none] [&::-webkit-scrollbar]:hidden', className)}>
             {tabs.map((tab) => (
                 <button
@@ -280,16 +265,15 @@ export function Tabs({ tabs, value, onChange, className }) {
                     type="button"
                     onClick={() => onChange(tab.value)}
                     className={cx(
-                        'relative shrink-0 rounded-lg px-3.5 py-1.5 text-[13px] font-semibold transition-all duration-200',
+                        '-mb-px shrink-0 border-b-2 pb-2.5 pt-1 text-[13.5px] font-medium transition-colors duration-150',
                         value === tab.value
-                            ? 'bg-white text-slate-900 shadow-sm'
-                            : 'text-slate-500 hover:text-slate-800'
+                            ? 'border-ink text-zinc-900'
+                            : 'border-transparent text-zinc-500 hover:text-zinc-800'
                     )}
                 >
                     {tab.label}
                     {tab.count != null && (
-                        <span className={cx('ml-1.5 text-[11px] tabular-nums',
-                            value === tab.value ? 'text-brand-600' : 'text-slate-400')}>
+                        <span className="ml-1.5 rounded bg-zinc-100 px-1.5 py-px text-[11px] tabular-nums text-zinc-600">
                             {tab.count}
                         </span>
                     )}

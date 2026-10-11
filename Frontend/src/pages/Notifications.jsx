@@ -74,30 +74,28 @@ export default function Notifications() {
                 />
             ) : (
                 <div className="space-y-2.5">
-                    {items.map((n, i) => (
+                    {items.map((n) => (
                         <Card
                             key={n._id}
                             className={cx(
-                                'animate-rise stagger flex items-start gap-4 p-4 transition-colors',
+                                'flex items-start gap-4 p-4 transition-colors',
                                 !n.read && 'border-brand-200 bg-brand-50'
-                            )}
-                            style={{ '--i': i }}
-                        >
+                            )}>
                             <span className={cx(
-                                'mt-0.5 grid size-9 shrink-0 place-items-center rounded-xl ring-1 ring-inset',
+                                'mt-0.5 grid size-9 shrink-0 place-items-center rounded-md ring-1 ring-inset',
                                 n.read
-                                    ? 'bg-slate-50 text-slate-500 ring-slate-200'
-                                    : 'bg-indigo-50 text-indigo-600 ring-indigo-200'
+                                    ? 'bg-zinc-50 text-zinc-500 ring-zinc-200'
+                                    : 'bg-brand-50 text-brand-600 ring-brand-200'
                             )}>
                                 <IconBell className="size-[17px]" />
                             </span>
 
                             <div className="min-w-0 flex-1">
                                 <p className={cx('text-[13.5px] leading-relaxed',
-                                    n.read ? 'text-slate-500' : 'text-slate-700')}>
+                                    n.read ? 'text-zinc-500' : 'text-zinc-700')}>
                                     {n.message}
                                 </p>
-                                <p className="mt-1 text-[11.5px] text-slate-400" title={formatDateTime(n.createdAt)}>
+                                <p className="mt-1 text-[11.5px] text-zinc-400" title={formatDateTime(n.createdAt)}>
                                     {timeAgo(n.createdAt)}
                                 </p>
                             </div>

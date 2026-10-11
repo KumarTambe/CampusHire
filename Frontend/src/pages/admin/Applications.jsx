@@ -47,7 +47,7 @@ export default function AdminApplications() {
                 subtitle="Every application across the portal, each with the complete audit trail of who changed what, and why."
                 actions={
                     <div className="relative w-full sm:w-72">
-                        <IconSearch className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-slate-500" />
+                        <IconSearch className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-zinc-500" />
                         <Input className="pl-9" placeholder="Search student, role, company"
                             value={query} onChange={e => setQuery(e.target.value)} />
                     </div>
@@ -73,24 +73,24 @@ export default function AdminApplications() {
                     description="Try a different search term or switch tabs." />
             ) : (
                 <div className="space-y-2.5">
-                    {visible.map((app, i) => {
+                    {visible.map((app) => {
                         const open = expanded === app._id
                         const snap = app.eligibilitySnapshot || {}
                         return (
-                            <Card key={app._id} className="animate-rise stagger overflow-hidden" style={{ '--i': i }}>
+                            <Card key={app._id} className="overflow-hidden">
                                 <div className="p-5">
                                     <div className="flex flex-wrap items-start justify-between gap-4">
                                         <div className="min-w-0">
-                                            <p className="text-[14.5px] font-medium text-slate-900">
+                                            <p className="text-[14.5px] font-medium text-zinc-900">
                                                 {app.student?.firstName} {app.student?.lastName}
-                                                <span className="text-slate-500"> → </span>
-                                                <span className="text-slate-700">{app.job?.title || 'Deleted role'}</span>
+                                                <span className="text-zinc-500"> → </span>
+                                                <span className="text-zinc-700">{app.job?.title || 'Deleted role'}</span>
                                             </p>
-                                            <p className="mt-1 text-[12.5px] text-slate-500">
+                                            <p className="mt-1 text-[12.5px] text-zinc-500">
                                                 {app.job?.postedBy?.companyName || '—'}
-                                                <span className="text-slate-400"> · {app.student?.email}</span>
+                                                <span className="text-zinc-400"> · {app.student?.email}</span>
                                             </p>
-                                            <div className="mt-2.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11.5px] text-slate-400">
+                                            <div className="mt-2.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11.5px] text-zinc-400">
                                                 <span className="tabular-nums">CGPA {snap.cgpa ?? '—'}</span>
                                                 <span>{snap.branch || '—'}</span>
                                                 <span className="tabular-nums">Batch {snap.graduationYear ?? '—'}</span>
@@ -110,32 +110,32 @@ export default function AdminApplications() {
                                 </div>
 
                                 {open && (
-                                    <div className="animate-fade border-t border-white/[0.07] bg-white/[0.015] p-5">
+                                    <div className="animate-fade border-t border-zinc-200 bg-zinc-50 p-5">
                                         {(app.history || []).length === 0 ? (
-                                            <p className="text-[12.5px] text-slate-500">
+                                            <p className="text-[12.5px] text-zinc-500">
                                                 No status changes yet — the application is still at “{app.status}”.
                                             </p>
                                         ) : (
                                             <ol className="relative space-y-4 pl-5">
-                                                <span className="absolute left-[3px] top-2 bottom-2 w-px bg-white/10" />
+                                                <span className="absolute left-[3px] top-2 bottom-2 w-px bg-zinc-200" />
                                                 {app.history.map(log => (
                                                     <li key={log._id} className="relative">
-                                                        <span className="absolute -left-5 top-1.5 size-[7px] rounded-full bg-brand-500 ring-4 ring-indigo-400/12" />
-                                                        <p className="text-[13px] text-slate-400">
+                                                        <span className="absolute -left-5 top-1.5 size-[7px] rounded-full bg-brand-500 ring-4 ring-brand-100" />
+                                                        <p className="text-[13px] text-zinc-400">
                                                             <span className="capitalize">{log.oldStatus}</span>
                                                             {' → '}
-                                                            <span className="font-medium capitalize text-slate-900">{log.newStatus}</span>
+                                                            <span className="font-medium capitalize text-zinc-900">{log.newStatus}</span>
                                                             {log.changedBy && (
-                                                                <span className="text-slate-500">
+                                                                <span className="text-zinc-500">
                                                                     {' by '}{log.changedBy.firstName} {log.changedBy.lastName}
                                                                     {' ('}{log.changedByRole}{')'}
                                                                 </span>
                                                             )}
                                                         </p>
                                                         {log.reason && (
-                                                            <p className="mt-1 text-[12.5px] italic text-slate-500">“{log.reason}”</p>
+                                                            <p className="mt-1 text-[12.5px] italic text-zinc-500">“{log.reason}”</p>
                                                         )}
-                                                        <p className="mt-0.5 font-mono text-[11px] text-slate-400">
+                                                        <p className="mt-0.5 font-mono text-[11px] text-zinc-400">
                                                             {formatDateTime(log.createdAt)}
                                                         </p>
                                                     </li>

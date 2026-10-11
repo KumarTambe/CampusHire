@@ -66,7 +66,7 @@ export default function AdminUsers() {
                 subtitle="Every account on CampusHire. Deactivating blocks sign-in immediately without deleting any history."
                 actions={
                     <div className="relative w-full sm:w-72">
-                        <IconSearch className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-slate-500" />
+                        <IconSearch className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-zinc-500" />
                         <Input className="pl-9" placeholder="Search name, email, company"
                             value={query} onChange={e => setQuery(e.target.value)} />
                     </div>
@@ -93,22 +93,21 @@ export default function AdminUsers() {
                     description="Try a different search or filter." />
             ) : (
                 <div className="space-y-2.5">
-                    {visible.map((u, i) => (
-                        <Card key={u._id} className={cx('animate-rise stagger p-4', !u.isActive && 'opacity-70')}
-                            style={{ '--i': i }}>
+                    {visible.map((u) => (
+                        <Card key={u._id} className={cx('p-4', !u.isActive && 'opacity-70')}>
                             <div className="flex flex-wrap items-center gap-4">
                                 <span className={cx(
-                                    'grid size-10 shrink-0 place-items-center rounded-xl text-[12.5px] font-semibold ring-1 ring-inset ring-slate-200',
-                                    u.role === 'admin' ? 'bg-amber-50 text-amber-700'
-                                        : u.role === 'recruiter' ? 'bg-violet-50 text-violet-700'
-                                            : 'bg-indigo-50 text-indigo-700'
+                                    'grid size-10 shrink-0 place-items-center rounded-xl text-[12.5px] font-semibold ring-1 ring-inset ring-zinc-200',
+                                    u.role === 'admin' ? 'bg-zinc-900 text-white'
+                                        : u.role === 'recruiter' ? 'bg-amber-50 text-amber-800'
+                                            : 'bg-brand-50 text-brand-700'
                                 )}>
                                     {initials(u)}
                                 </span>
 
                                 <div className="min-w-0 flex-1">
                                     <div className="flex flex-wrap items-center gap-2">
-                                        <p className="text-[14px] font-medium text-slate-900">
+                                        <p className="text-[14px] font-medium text-zinc-900">
                                             {u.firstName} {u.lastName}
                                         </p>
                                         <Badge tone={u.role === 'admin' ? 'amber' : u.role === 'recruiter' ? 'violet' : 'indigo'}
@@ -116,8 +115,8 @@ export default function AdminUsers() {
                                         {u.role === 'recruiter' && <StatusBadge status={u.verificationStatus} />}
                                         {!u.isActive && <Badge tone="rose" dot>Deactivated</Badge>}
                                     </div>
-                                    <p className="mt-1 truncate text-[12.5px] text-slate-500">{u.email}</p>
-                                    <p className="mt-0.5 truncate text-[11.5px] text-slate-400">
+                                    <p className="mt-1 truncate text-[12.5px] text-zinc-500">{u.email}</p>
+                                    <p className="mt-0.5 truncate text-[11.5px] text-zinc-400">
                                         {u.role === 'student'
                                             ? [u.college, u.branch, u.cgpa != null && `CGPA ${u.cgpa}`, u.graduationYear]
                                                 .filter(Boolean).join(' · ') || 'Profile incomplete'

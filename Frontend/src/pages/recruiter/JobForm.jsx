@@ -118,8 +118,8 @@ export default function JobForm() {
 
             <form onSubmit={onSubmit} className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_320px]">
                 <div className="space-y-5">
-                    <Card className="animate-rise p-6 sm:p-7">
-                        <h2 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">
+                    <Card className="p-6 sm:p-7">
+                        <h2 className="text-[14px] font-semibold text-zinc-900">
                             The role
                         </h2>
                         <div className="mt-4 space-y-4">
@@ -139,11 +139,11 @@ export default function JobForm() {
                         </div>
                     </Card>
 
-                    <Card className="animate-rise p-6 sm:p-7" style={{ animationDelay: '60ms' }}>
-                        <h2 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">
+                    <Card className="p-6 sm:p-7">
+                        <h2 className="text-[14px] font-semibold text-zinc-900">
                             Eligibility criteria
                         </h2>
-                        <p className="mt-2 text-[12.5px] leading-relaxed text-slate-500">
+                        <p className="mt-2 text-[12.5px] leading-relaxed text-zinc-500">
                             Leave a field blank to place no restriction on it.
                         </p>
 
@@ -171,10 +171,10 @@ export default function JobForm() {
                                             type="button"
                                             onClick={() => toggleBranch(branch)}
                                             className={cx(
-                                                'rounded-lg px-3 py-1.5 text-[12.5px] ring-1 ring-inset transition-all duration-200',
+                                                'rounded-md px-3 py-1.5 text-[12.5px] ring-1 ring-inset transition-colors duration-150',
                                                 on
-                                                    ? 'bg-indigo-50 text-indigo-700 ring-indigo-300'
-                                                    : 'bg-slate-50 text-slate-500 ring-slate-200 hover:bg-slate-100 hover:text-slate-700'
+                                                    ? 'bg-ink text-white ring-ink'
+                                                    : 'bg-white text-zinc-600 ring-zinc-300 hover:bg-zinc-50 hover:text-zinc-900'
                                             )}
                                         >
                                             {branch}
@@ -185,8 +185,8 @@ export default function JobForm() {
                         </Field>
                     </Card>
 
-                    <Card className="animate-rise p-6 sm:p-7" style={{ animationDelay: '100ms' }}>
-                        <h2 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">
+                    <Card className="p-6 sm:p-7">
+                        <h2 className="text-[14px] font-semibold text-zinc-900">
                             Logistics
                         </h2>
                         <div className="mt-4 grid gap-4 sm:grid-cols-2">
@@ -215,31 +215,31 @@ export default function JobForm() {
 
                 {/* ------------------------------------------------- summary */}
                 <div className="space-y-5 lg:sticky lg:top-24 lg:self-start">
-                    <Card className="animate-rise p-6" style={{ animationDelay: '80ms' }}>
-                        <h2 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">
+                    <Card className="p-6">
+                        <h2 className="text-[14px] font-semibold text-zinc-900">
                             Who can apply
                         </h2>
                         {openToAll ? (
-                            <p className="mt-3.5 text-[13.5px] leading-relaxed text-slate-500">
+                            <p className="mt-3.5 text-[13.5px] leading-relaxed text-zinc-500">
                                 Every student on CampusHire. Add criteria on the left to narrow it.
                             </p>
                         ) : (
                             <ul className="mt-4 space-y-2.5 text-[13px]">
                                 {form.minCGPA > 0 && (
                                     <li className="flex justify-between gap-3">
-                                        <span className="text-slate-500">CGPA</span>
-                                        <span className="tabular-nums text-slate-700">≥ {form.minCGPA}</span>
+                                        <span className="text-zinc-500">CGPA</span>
+                                        <span className="tabular-nums text-zinc-700">≥ {form.minCGPA}</span>
                                     </li>
                                 )}
                                 {form.graduationYear && (
                                     <li className="flex justify-between gap-3">
-                                        <span className="text-slate-500">Batch</span>
-                                        <span className="tabular-nums text-slate-700">{form.graduationYear}</span>
+                                        <span className="text-zinc-500">Batch</span>
+                                        <span className="tabular-nums text-zinc-700">{form.graduationYear}</span>
                                     </li>
                                 )}
                                 {form.allowedBranches.length > 0 && (
                                     <li>
-                                        <span className="text-slate-500">Branches</span>
+                                        <span className="text-zinc-500">Branches</span>
                                         <div className="mt-2 flex flex-wrap gap-1.5">
                                             {form.allowedBranches.map(b => (
                                                 <Badge key={b} tone="indigo">{b}</Badge>
@@ -264,20 +264,20 @@ export default function JobForm() {
                                 </Button>
                             )}
                         </div>
-                        <p className="mt-3.5 text-center text-[11.5px] leading-relaxed text-slate-400">
+                        <p className="mt-3.5 text-center text-[11.5px] leading-relaxed text-zinc-400">
                             Drafts stay private to you. Publishing makes the role visible to every eligible student.
                         </p>
                     </Card>
 
                     {editing && (
-                        <Card className="animate-rise p-5" style={{ animationDelay: '120ms' }}>
+                        <Card className="p-5">
                             <div className="flex items-center justify-between">
-                                <span className="text-[12.5px] text-slate-500">Current status</span>
+                                <span className="text-[12.5px] text-zinc-500">Current status</span>
                                 <Badge tone={status === 'published' ? 'emerald' : status === 'closed' ? 'rose' : 'slate'}
                                     dot className="capitalize">{status}</Badge>
                             </div>
                             <Link to={`/recruiter/jobs/${id}/applicants`}
-                                className="mt-4 block text-[13px] text-indigo-600 underline-offset-4 hover:underline">
+                                className="mt-4 block text-[13px] text-brand-600 underline-offset-4 hover:underline">
                                 View applicants →
                             </Link>
                         </Card>

@@ -42,8 +42,8 @@ export default function Login() {
 
     return (
         <AuthShell
-            title="Welcome Back"
-            subtitle="Login to continue your career journey."
+            title="Sign in"
+            subtitle="Welcome back. Pick your role and sign in to CampusHire."
             footer={<>New here? <Link to="/register" className="font-semibold text-brand-600 underline-offset-4 hover:underline">Create an account</Link></>}
         >
             <form onSubmit={onSubmit} className="space-y-4">
